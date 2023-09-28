@@ -9,8 +9,8 @@ Center buttonTask(
     child: GestureDetector(
       onTap: () => onTap.call(),
       child: Container(
-        height: 36,
-        width: 150,
+        height: 34,
+        width: 120,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: colorBg,
@@ -20,7 +20,7 @@ Center buttonTask(
           child: Text(
             tittle,
             style: TextStyle(
-                color: colorText, fontWeight: FontWeight.bold, fontSize: 16.0),
+                color: colorText, fontWeight: FontWeight.bold, fontSize: 14.0),
           ),
         ),
       ),
