@@ -18,12 +18,14 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: mainPageController.widgetOptions.elementAt(mainPageController.selectedIndex.value),
+        body: mainPageController.widgetOptions
+            .elementAt(mainPageController.selectedIndex.value),
         bottomNavigationBar: BottomNavigationBar(
-
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Nhiệm vụ"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), label: "Lịch sử"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Cá nhân"),
           ],
           currentIndex: mainPageController.selectedIndex.value,
