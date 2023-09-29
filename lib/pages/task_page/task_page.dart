@@ -26,7 +26,7 @@ class TasksPage extends StatelessWidget {
               Container(
                 width: maxwidth - 32,
                 height: 40,
-                margin: EdgeInsets.only(top: 12),
+                margin: EdgeInsets.only(top: 12, bottom: 12),
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(
@@ -57,10 +57,26 @@ class TasksPage extends StatelessWidget {
               Expanded(
                 child: TabBarView(children: [
                   ListView(
-                    children: [...List.generate(6, (index) => taskItem())],
+                    children: [
+                      ...List.generate(
+                          6,
+                          (index) => taskItem(
+                                btnLeft: "Từ chối",
+                                btnRight: "Tiếp nhận",
+                                status: "Đang chờ",
+                              ))
+                    ],
                   ),
                   ListView(
-                    children: [...List.generate(6, (index) => taskItem())],
+                    children: [
+                      ...List.generate(
+                          6,
+                          (index) => taskItem(
+                                btnLeft: "Từ chối",
+                                btnRight: "Tiếp nhận",
+                                status: "Đang xử lý",
+                              ))
+                    ],
                   )
                 ]),
               ),

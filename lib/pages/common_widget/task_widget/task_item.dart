@@ -4,7 +4,12 @@ import 'button_task.dart';
 import 'status_task.dart';
 
 class taskItem extends StatefulWidget {
-  const taskItem({super.key});
+  final String btnLeft;
+  final String btnRight;
+  final String status;
+
+  const taskItem(
+      {required this.btnLeft, required this.btnRight, required this.status});
 
   @override
   State<taskItem> createState() => _taskItemState();
@@ -18,7 +23,7 @@ class _taskItemState extends State<taskItem> {
       children: [
         Container(
           padding: const EdgeInsets.all(24),
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+          margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(24),
@@ -46,9 +51,7 @@ class _taskItemState extends State<taskItem> {
                   ),
                 ],
               ),
-              statusTask(
-                  colorBg: Color.fromARGB(255, 176, 113, 187),
-                  tittle: 'Đang chờ')
+              statusTask(tittle: widget.status)
             ]),
             Container(
               margin: const EdgeInsets.only(top: 12, bottom: 12),
@@ -110,12 +113,12 @@ class _taskItemState extends State<taskItem> {
                       colorBg: Colors.white,
                       colorText: Colors.black,
                       onTap: () => {},
-                      tittle: 'Từ chối'),
+                      tittle: widget.btnLeft),
                   buttonTask(
                       colorBg: const Color(0xFF003B40),
                       colorText: const Color.fromARGB(255, 248, 245, 245),
                       onTap: () => {},
-                      tittle: 'Tiếp nhận'),
+                      tittle: widget.btnRight),
                 ],
               ),
             )
