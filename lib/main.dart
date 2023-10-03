@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/authentications/authentication.dart';
+
+import 'package:hiaki_admin/pages/profile/profile_page.dart';
+import 'package:hiaki_admin/pages/task_page/detail_task_page.dart';
+
+import 'package:hiaki_admin/pages/main_page.dart';
+import 'package:hiaki_admin/pages/profile/profile_page.dart';
+
 import 'package:hiaki_admin/pages/task_page/task_page.dart';
 import 'package:hiaki_admin/scroll_behavior%20(1).dart';
 

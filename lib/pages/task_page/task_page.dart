@@ -10,7 +10,6 @@ class TasksPage extends StatelessWidget {
     // var maxHeight = MediaQuery.sizeOf(context).height;
     var maxWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 233, 231, 234),
       appBar: AppBar(
         title: const Center(
             child: Text(
