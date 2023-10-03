@@ -29,8 +29,6 @@ class _HistoryPageState extends State<HistoryPage> {
             ...List.generate(
                 6,
                 (index) => taskItem(
-                      btnLeft: "Từ chối",
-                      btnRight: "Tiếp nhận",
                       status: "Hoàn thành",
                     ))
           ],
