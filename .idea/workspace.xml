@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Hiaki_Admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Hiaki_Admin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/common_widget/item_details_common.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pages/task_page/detail_task_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/avatar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/generated/assets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generated/assets.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +44,14 @@
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/thuongtv/Documents/ProjectFlutter/Hiaki_Admin/assets&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/thuongtv/Documents/ProjectFlutter/Hiaki_Admin/lib/pages/common_widget&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/pages/common_widget" />
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
