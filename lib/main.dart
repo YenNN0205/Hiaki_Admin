@@ -30,11 +30,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      home: const detailTaskPage(),
-      // home: const LoginPage(),
+      // home: const detailTaskPage(),
+      home: const LoginPage(),
 
 
-      home: const MainPage(),
+
       //   home: const ProfilePage(),
       // home: const TasksPage(),
 
