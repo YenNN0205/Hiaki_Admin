@@ -13,73 +13,76 @@ class TasksPage extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
             child: Text(
-          'Danh sách hỗ trợ',
-          style: TextStyle(color: Colors.white),
-        )),
+              'Danh sách hỗ trợ',
+              style: TextStyle(color: Colors.white),
+            )),
         flexibleSpace: const GradientAppBarColor(),
       ),
-      body: DefaultTabController(
-          length: 2,
-          child: Column(
-            children: [
-              Container(
-                width: maxWidth - 32,
-                height: 40,
-                margin: EdgeInsets.only(top: 12, bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(
-                    25.0,
-                  ),
-                ),
-                child: TabBar(
-                  indicator: BoxDecoration(
+      body: Container(
+        color: const Color.fromARGB(255, 233, 231, 234),
+        child: DefaultTabController(
+            length: 2,
+            child: Column(
+              children: [
+                Container(
+                  width: maxWidth - 32,
+                  height: 40,
+                  margin: EdgeInsets.only(top: 12, bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(
                       25.0,
                     ),
-                    color: const Color.fromARGB(255, 191, 229, 193),
                   ),
-                  labelColor: Colors.black,
-                  unselectedLabelColor:
-                      const Color.fromARGB(255, 113, 113, 113),
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  tabs: const [
-                    Center(
-                        child: Text('Đợi duyệt',
-                            style: TextStyle(fontWeight: FontWeight.bold))),
-                    Center(
-                        child: Text('Đã nhận',
-                            style: TextStyle(fontWeight: FontWeight.bold))),
-                  ],
+                  child: TabBar(
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        25.0,
+                      ),
+                      color: const Color.fromARGB(255, 191, 229, 193),
+                    ),
+                    labelColor: Colors.black,
+                    unselectedLabelColor:
+                    const Color.fromARGB(255, 113, 113, 113),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    tabs: const [
+                      Center(
+                          child: Text('Đợi duyệt',
+                              style: TextStyle(fontWeight: FontWeight.bold))),
+                      Center(
+                          child: Text('Đã nhận',
+                              style: TextStyle(fontWeight: FontWeight.bold))),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: TabBarView(children: [
-                  ListView(
-                    children: [
-                      ...List.generate(
-                          6,
-                          (index) => taskItem(
-                                btnLeft: "Từ chối",
-                                btnRight: "Tiếp nhận",
-                                status: "Đang chờ",
-                              ))
-                    ],
-                  ),
-                  ListView(
-                    children: [
-                      ...List.generate(
-                          6,
-                          (index) => taskItem(
-                                btnRight: "Hoàn Thành",
-                                status: "Đang xử lý",
-                              ))
-                    ],
-                  )
-                ]),
-              ),
-            ],
-          )),
+                Expanded(
+                  child: TabBarView(children: [
+                    ListView(
+                      children: [
+                        ...List.generate(
+                            6,
+                                (index) => taskItem(
+                              btnLeft: "Từ chối",
+                              btnRight: "Tiếp nhận",
+                              status: "Đang chờ",
+                            ))
+                      ],
+                    ),
+                    ListView(
+                      children: [
+                        ...List.generate(
+                            6,
+                                (index) => taskItem(
+                              btnRight: "Hoàn Thành",
+                              status: "Đang xử lý",
+                            ))
+                      ],
+                    )
+                  ]),
+                ),
+              ],
+            )),
+      ),
     );
   }
 }
