@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:hiaki_admin/pages/common_widget/button_common.dart';
+import 'package:get/get.dart';
+import '../yesno_dialog.dart';
 import 'button_task.dart';
 import 'status_task.dart';
 
@@ -8,8 +10,7 @@ class taskItem extends StatefulWidget {
   final String btnRight;
   final String status;
 
-  const taskItem(
-      {required this.btnLeft, required this.btnRight, required this.status});
+  const taskItem({this.btnLeft = "", this.btnRight = "", required this.status});
 
   @override
   State<taskItem> createState() => _taskItemState();
@@ -18,7 +19,7 @@ class taskItem extends StatefulWidget {
 class _taskItemState extends State<taskItem> {
   @override
   Widget build(BuildContext context) {
-    var maxwidth = MediaQuery.sizeOf(context).width;
+    var maxWidth = MediaQuery.sizeOf(context).width;
     return Column(
       children: [
         Container(
@@ -93,7 +94,7 @@ class _taskItemState extends State<taskItem> {
                     ),
                     Container(
                       padding: const EdgeInsets.only(top: 6.0),
-                      width: maxwidth * 0.5 - 48,
+                      width: maxWidth * 0.5 - 48,
                       child: const Text(
                         '202 Lý Chính Thắng, Q3',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -104,24 +105,34 @@ class _taskItemState extends State<taskItem> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 18),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  buttonTask(
-                      colorBg: Colors.white,
-                      colorText: Colors.black,
-                      onTap: () => {},
-                      tittle: widget.btnLeft),
-                  buttonTask(
-                      colorBg: const Color(0xFF003B40),
-                      colorText: const Color.fromARGB(255, 248, 245, 245),
-                      onTap: () => {},
-                      tittle: widget.btnRight),
-                ],
-              ),
-            )
+            if (widget.btnLeft != "" && widget.btnRight != "")
+              Padding(
+                padding: const EdgeInsets.only(top: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buttonTask(
+                        colorBg: Colors.white,
+                        colorText: Colors.black,
+                        onTap: () => yesNoDialog("Từ chối hỗ trợ"),
+                        tittle: widget.btnLeft),
+                    buttonTask(
+                        colorBg: const Color(0xFF003B40),
+                        colorText: const Color.fromARGB(255, 248, 245, 245),
+                        onTap: () => yesNoDialog("Tiếp nhận hỗ trợ"),
+                        tittle: widget.btnRight),
+                  ],
+                ),
+              )
+            else if (widget.btnRight != "")
+              Padding(
+                padding: const EdgeInsets.only(top: 18),
+                child: buttonCommon(
+                    maxWidth: maxWidth * 0.7,
+                    height: 32,
+                    onTap: () => yesNoDialog("Xác nhận Hoàn thành"),
+                    tittle: widget.btnRight),
+              )
           ]),
         ),
       ],

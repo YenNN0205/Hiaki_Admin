@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
-Center buttonCommon({required double maxWidth,required Function() onTap,required tittle }) {
+Center buttonCommon(
+    {required double maxWidth,
+    required Function() onTap,
+    required tittle,
+    double height = 52}) {
   return Center(
     child: GestureDetector(
-      onTap: ()=>onTap.call(),
+      onTap: () => onTap.call(),
       child: Container(
-        height: 52,
+        height: height,
         width: maxWidth * 0.7,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: const Color(0xFF003B40),
         ),
-        child:  Center(
+        child: Center(
           child: Text(
-           tittle,
+            tittle,
             style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

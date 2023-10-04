@@ -7,8 +7,8 @@ class TasksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var maxheight = MediaQuery.sizeOf(context).height;
-    var maxwidth = MediaQuery.sizeOf(context).width;
+    // var maxHeight = MediaQuery.sizeOf(context).height;
+    var maxWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 233, 231, 234),
       appBar: AppBar(
@@ -24,7 +24,7 @@ class TasksPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width: maxwidth - 32,
+                width: maxWidth - 32,
                 height: 40,
                 margin: EdgeInsets.only(top: 12, bottom: 12),
                 decoration: BoxDecoration(
@@ -72,8 +72,7 @@ class TasksPage extends StatelessWidget {
                       ...List.generate(
                           6,
                           (index) => taskItem(
-                                btnLeft: "Từ chối",
-                                btnRight: "Tiếp nhận",
+                                btnRight: "Hoàn Thành",
                                 status: "Đang xử lý",
                               ))
                     ],
