@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/generated/assets.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/hiaki_admin_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/hiaki_admin_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
