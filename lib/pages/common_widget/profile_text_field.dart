@@ -1,14 +1,20 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
-Padding profileTextField({required String text,int? textLength ,required Icon iconTextField,required TextInputType textType ,required String hintText,required bool obscureText}) {
+Padding profileTextField(
+    {required String text,
+    int? textLength,
+    required Icon iconTextField,
+    required TextInputType textType,
+    required String hintText,
+    required bool obscureText}) {
   final textController = TextEditingController();
   textController.text = text;
   return Padding(
-    padding: const EdgeInsets.only(left: 30.0, right: 30.0,bottom:15),
+    padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 15),
     child: TextField(
-      readOnly: true,
+        readOnly: true,
         keyboardType: textType,
         controller: textController,
         maxLength: textLength,
@@ -22,24 +28,21 @@ Padding profileTextField({required String text,int? textLength ,required Icon ic
               borderSide: BorderSide(
                 color: Colors.red,
                 width: 2,
-              )
-          ),
-          enabledBorder: OutlineInputBorder( //Outline border type for TextField
+              )),
+          enabledBorder: OutlineInputBorder(
+              //Outline border type for TextField
               borderRadius: BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: Colors.black54,
                 width: 2,
-              )
-          ),
+              )),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
               borderSide: BorderSide(
                 color: Colors.black54,
                 width: 2,
-              )
-          ),
-        )
-    ),
+              )),
+        )),
   );
 }
 

@@ -9,8 +9,19 @@ class taskItem extends StatefulWidget {
   final String btnLeft;
   final String btnRight;
   final String status;
+  final String request;
+  final String timeSchedule;
 
-  const taskItem({this.btnLeft = "", this.btnRight = "", required this.status});
+  final String address;
+
+  const taskItem(
+      {super.key,
+      this.btnLeft = "",
+      this.btnRight = "",
+      required this.status,
+      required this.request,
+      required this.timeSchedule,
+      required this.address});
 
   @override
   State<taskItem> createState() => _taskItemState();
@@ -40,10 +51,10 @@ class _taskItemState extends State<taskItem> {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 24),
                     child: Text(
-                      'Lõi Aqua Extra',
+                      widget.request,
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -63,7 +74,7 @@ class _taskItemState extends State<taskItem> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -76,7 +87,7 @@ class _taskItemState extends State<taskItem> {
                     Padding(
                       padding: EdgeInsets.only(top: 6.0),
                       child: Text(
-                        '27/09/2023 12:00 AM',
+                        widget.timeSchedule,
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -95,8 +106,8 @@ class _taskItemState extends State<taskItem> {
                     Container(
                       padding: const EdgeInsets.only(top: 6.0),
                       width: maxWidth * 0.5 - 48,
-                      child: const Text(
-                        '202 Lý Chính Thắng, Q3',
+                      child: Text(
+                        widget.address,
                         style: TextStyle(fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                       ),

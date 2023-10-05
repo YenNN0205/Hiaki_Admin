@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:hiaki_admin/model/support_list.dart';
 import 'package:http/http.dart' as http;
 import 'data_bucket.dart';
-
 
 class Networking {
   static final Networking _instance = Networking._internal();
@@ -12,7 +12,7 @@ class Networking {
   Networking._internal();
 
   // Need to be changed
-  var _host = 'http://103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery';
+  var _host = 'http://103.157.218.115/Hiaki_Client/hs/Hiaki_Client/';
   var _userName = 'Administrator';
   final _password = '';
 
@@ -26,17 +26,23 @@ class Networking {
     return _instance;
   }
 
+  Future<dynamic> getMetadata(String userName, String password) async {
+    String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$userName:$password'))}';
+    Map<String, String> requestHeaders = {'authorization': basicAuth};
 
-  Future<dynamic> getMetadata(Object body) async {
-    // String basicAuth =
-    //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
-    // Map<String, String> requestHeaders = {'authorization': basicAuth};
+    final response = await http.get(Uri.parse('$_host/V1/metadata_admin'),
+        headers: requestHeaders);
 
-    final response = await http.post(Uri.parse('$_host/V1/Administrator'), body: body);
     if (response.statusCode == 200) {
       dynamic value = jsonDecode(response.body);
-
-      return response.statusCode ;
+      dynamic dataUser = value['Metadata'][1]['UserName'][0];
+      DataBucket.getInstance().setDataProfile(dataUser);
+      dynamic dataSupport = value['Metadata'][0]['SupportList'];
+      DataBucket.getInstance().setSupportPending(dataSupport);
+      DataBucket.getInstance().setSupportProgress(dataSupport);
+      DataBucket.getInstance().setSupportHistory(dataSupport);
+      return response.statusCode;
     } else {
       return response.statusCode;
     }
@@ -47,18 +53,19 @@ class Networking {
     //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
     // Map<String, String> requestHeaders = {'authorization': basicAuth};
 
-    final response = await http.post(Uri.parse('$_host/V1/CoffeeProduct'), body: object);
+    final response =
+        await http.post(Uri.parse('$_host/V1/CoffeeProduct'), body: object);
 
-      return response.statusCode;
-
+    return response.statusCode;
   }
 
-  Future<dynamic> deleteAPI(String token,String productCode) async {
+  Future<dynamic> deleteAPI(String token, String productCode) async {
     // String basicAuth =
     //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
     // Map<String, String> requestHeaders = {'authorization': basicAuth};
 
-    final response = await http.delete(Uri.parse('$_host/V1/CoffeeProduct?Token=$token&SerialNumber=$productCode'));
+    final response = await http.delete(Uri.parse(
+        '$_host/V1/CoffeeProduct?Token=$token&SerialNumber=$productCode'));
 
     return response.statusCode;
   }
@@ -68,10 +75,11 @@ class Networking {
     //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
     // Map<String, String> requestHeaders = {'authorization': basicAuth};
 
-    final response = await http.get(Uri.parse('$_host/V1/ReloadAdministrator?Token=$token'));
+    final response =
+        await http.get(Uri.parse('$_host/V1/ReloadAdministrator?Token=$token'));
     if (response.statusCode == 200) {
       dynamic value = jsonDecode(response.body);
-      return response.statusCode ;
+      return response.statusCode;
     } else {
       return response.statusCode;
     }
@@ -81,14 +89,12 @@ class Networking {
     // String basicAuth =
     //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
     // Map<String, String> requestHeaders = {'authorization': basicAuth};
-    http://103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery/V1/CoffeeProduct?CoffeeProductCode=0001
+    // http: //103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery/V1/CoffeeProduct?CoffeeProductCode=0001
 
-    final response = await http.put(Uri.parse('$_host/V1/CoffeeProduct?CoffeeProductCode=$code'), body: object);
+    final response = await http.put(
+        Uri.parse('$_host/V1/CoffeeProduct?CoffeeProductCode=$code'),
+        body: object);
 
     return response.statusCode;
-
   }
-
-
-
 }

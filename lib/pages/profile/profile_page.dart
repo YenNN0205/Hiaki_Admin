@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/authentications/authentication.dart';
 import 'package:hiaki_admin/pages/common_widget/common.dart';
+import 'package:hiaki_admin/utils/data_bucket.dart';
 
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/profile_text_field.dart';
@@ -18,6 +19,8 @@ class _ProfilePageState extends State<ProfilePage> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
+
+  final dataProfile = DataBucket.getInstance().getDataProfile();
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(bottom: 20, top: maxHeight * 0.11),
-                  child: const Text(
-                    'Nguyễn Văn C',
+                  child: Text(
+                    '${dataProfile[0].fullName ?? "No data"}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -81,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 profileTextField(
-                    text: 'Nguyễn Văn C',
+                    text: '${dataProfile[0].userName ?? "No data"}',
                     hintText: 'Username',
                     textType: TextInputType.text,
                     iconTextField: Icon(
@@ -90,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     obscureText: false),
                 profileTextField(
-                    text: "abc@gmail.com",
+                    text: "${dataProfile[0].email ?? "No data"}",
                     hintText: 'Email',
                     textType: TextInputType.emailAddress,
                     iconTextField: Icon(
@@ -99,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     obscureText: false),
                 profileTextField(
-                    text: "0355322422",
+                    text: "${dataProfile[0].phoneNumber ?? "No data"}",
                     hintText: 'Số Điện Thoại',
                     textLength: 10,
                     textType: TextInputType.number,
@@ -109,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     obscureText: false),
                 profileTextField(
-                    text: "202 Ly Chinh Thang",
+                    text: "${dataProfile[0].address ?? "No data"}",
                     hintText: 'Địa Chỉ',
                     textType: TextInputType.text,
                     iconTextField: Icon(
@@ -123,8 +126,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       maxWidth: maxWidth,
                       onTap: () {
                         Get.snackbar("Notification", "Log Out Success");
-                        Get.offAll(()=>LoginPage());
-                      },tittle: 'Đăng Xuất'),
+                        Get.offAll(() => LoginPage());
+                      },
+                      tittle: 'Đăng Xuất'),
                 ),
               ],
             ),
