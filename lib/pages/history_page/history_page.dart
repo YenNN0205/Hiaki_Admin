@@ -35,6 +35,7 @@ class _HistoryPageState extends State<HistoryPage> {
             itemBuilder: (BuildContext context, int index) {
               final item = dataSupportHistory[index];
               return taskItem(
+                item: item,
                 status: item.status ?? "",
                 request: item.request ?? "",
                 timeSchedule: item.timeSchedule ?? "",
