@@ -64,8 +64,7 @@ class TasksPage extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           final item = dataSupportPending[index];
                           return taskItem(
-                            btnLeft: "Từ chối",
-                            btnRight: "Chấp nhận",
+                            item: item,
                             status: item.status ?? "",
                             request: item.request ?? "",
                             timeSchedule: item.timeSchedule ?? "",
@@ -77,7 +76,7 @@ class TasksPage extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           final item = dataSupportProgress[index];
                           return taskItem(
-                            btnRight: "Hoàn thành",
+                            item: item,
                             status: item.status ?? "",
                             request: item.request ?? "",
                             timeSchedule: item.timeSchedule ?? "",
