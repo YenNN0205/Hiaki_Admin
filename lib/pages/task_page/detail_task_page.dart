@@ -5,14 +5,14 @@ import 'package:hiaki_admin/pages/common_widget/item_details_common.dart';
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/task_widget/status_task.dart';
 
-class detailTaskPage extends StatefulWidget {
-  const detailTaskPage({super.key});
+class DetailTaskPage extends StatefulWidget {
+  const DetailTaskPage({super.key});
 
   @override
-  State<detailTaskPage> createState() => _detailTaskPageState();
+  State<DetailTaskPage> createState() => _DetailTaskPageState();
 }
 
-class _detailTaskPageState extends State<detailTaskPage> {
+class _DetailTaskPageState extends State<DetailTaskPage> {
   @override
   Widget build(BuildContext context) {
     final double maxHeight = MediaQuery.of(context).size.height;
@@ -20,11 +20,11 @@ class _detailTaskPageState extends State<detailTaskPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-            child: Text(
-              'Chi tiết hỗ trợ',
-              style: TextStyle(color: Colors.white),
-            )),
+        centerTitle: true,
+        title: Text(
+          'Chi tiết hỗ trợ',
+          style: TextStyle(color: Colors.white),
+        ),
         flexibleSpace: const GradientAppBarColor(),
       ),
       body: SingleChildScrollView(
