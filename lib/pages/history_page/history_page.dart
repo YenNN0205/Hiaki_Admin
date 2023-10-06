@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/task_widget/task_item.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
-
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  final dataSupportHistory = DataBucket.getInstance().getSupportHistory();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +29,17 @@ class _HistoryPageState extends State<HistoryPage> {
           )),
           flexibleSpace: const GradientAppBarColor(),
         ),
-        body: ListView(
-          padding: EdgeInsets.only(top: 12),
-          children: [
-            ...List.generate(
-                6,
-                (index) => taskItem(
-                      status: "Hoàn thành",
-                    ))
-          ],
-        ));
+        body: ListView.builder(
+            padding: EdgeInsets.only(top: 12),
+            itemCount: dataSupportHistory.length,
+            itemBuilder: (BuildContext context, int index) {
+              final item = dataSupportHistory[index];
+              return taskItem(
+                status: item.status ?? "",
+                request: item.request ?? "",
+                timeSchedule: item.timeSchedule ?? "",
+                address: item.address ?? "",
+              );
+            }));
   }
 }

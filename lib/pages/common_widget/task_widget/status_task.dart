@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-Center statusTask({required tittle}) {
+Center statusTask({required String tittle}) {
+  String _tittle = "";
   Color colorBg = Color.fromARGB(255, 176, 113, 187);
-  if (tittle == "Đang chờ") {
+  if (tittle == "Open") {
     colorBg = Color.fromARGB(255, 176, 113, 187);
-  } else if (tittle == "Hoàn thành") {
+    _tittle = "Đang chờ";
+  } else if (tittle == "Done") {
     colorBg = Color.fromARGB(255, 18, 204, 27);
-  } else if (tittle == "Từ chối") {
+    _tittle = "Hoàn thành";
+  } else if (tittle == "Reject") {
     colorBg = Color.fromARGB(255, 214, 68, 20);
+    _tittle = "Từ chối";
   } else {
     colorBg = Color.fromARGB(255, 18, 138, 198);
+    _tittle = "Đang xử lý";
   }
 
   return Center(
@@ -18,7 +23,7 @@ Center statusTask({required tittle}) {
         decoration: BoxDecoration(
             color: colorBg, borderRadius: BorderRadius.circular(16)),
         child: Text(
-          tittle,
+          _tittle,
           style: const TextStyle(color: Colors.white, fontSize: 12),
         )),
   );

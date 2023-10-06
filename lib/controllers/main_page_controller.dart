@@ -9,8 +9,8 @@ class MainPageController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
   final List<Widget> widgetOptions = <Widget>[
-    const TasksPage(),
-    const HistoryPage(),
+    TasksPage(),
+    HistoryPage(),
     const ProfilePage(),
   ];
 

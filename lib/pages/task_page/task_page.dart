@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/task_widget/task_item.dart';
 
 class TasksPage extends StatelessWidget {
-  const TasksPage({super.key});
+  final dataSupportPending = DataBucket.getInstance().getSupportPending();
+  final dataSupportProgress = DataBucket.getInstance().getSupportProgress();
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +15,9 @@ class TasksPage extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
             child: Text(
-              'Danh sách hỗ trợ',
-              style: TextStyle(color: Colors.white),
-            )),
+          'Danh sách hỗ trợ',
+          style: TextStyle(color: Colors.white),
+        )),
         flexibleSpace: const GradientAppBarColor(),
       ),
       body: Container(
@@ -43,7 +45,7 @@ class TasksPage extends StatelessWidget {
                     ),
                     labelColor: Colors.black,
                     unselectedLabelColor:
-                    const Color.fromARGB(255, 113, 113, 113),
+                        const Color.fromARGB(255, 113, 113, 113),
                     indicatorSize: TabBarIndicatorSize.tab,
                     tabs: const [
                       Center(
@@ -57,27 +59,31 @@ class TasksPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: TabBarView(children: [
-                    ListView(
-                      children: [
-                        ...List.generate(
-                            6,
-                                (index) => taskItem(
-                              btnLeft: "Từ chối",
-                              btnRight: "Tiếp nhận",
-                              status: "Đang chờ",
-                            ))
-                      ],
-                    ),
-                    ListView(
-                      children: [
-                        ...List.generate(
-                            6,
-                                (index) => taskItem(
-                              btnRight: "Hoàn Thành",
-                              status: "Đang xử lý",
-                            ))
-                      ],
-                    )
+                    ListView.builder(
+                        itemCount: dataSupportPending.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final item = dataSupportPending[index];
+                          return taskItem(
+                            btnLeft: "Từ chối",
+                            btnRight: "Chấp nhận",
+                            status: item.status ?? "",
+                            request: item.request ?? "",
+                            timeSchedule: item.timeSchedule ?? "",
+                            address: item.address ?? "",
+                          );
+                        }),
+                    ListView.builder(
+                        itemCount: dataSupportProgress.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final item = dataSupportProgress[index];
+                          return taskItem(
+                            btnRight: "Hoàn thành",
+                            status: item.status ?? "",
+                            request: item.request ?? "",
+                            timeSchedule: item.timeSchedule ?? "",
+                            address: item.address ?? "",
+                          );
+                        }),
                   ]),
                 ),
               ],
