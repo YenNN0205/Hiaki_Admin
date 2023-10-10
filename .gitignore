@@ -8,3 +8,7 @@
 /.idea/
 /.idea/workspace.xml
 
+.vscode/launch.json
+pubspec.lock
+windows/flutter/CMakeLists.txt
+windows/runner/flutter_window.cpp
