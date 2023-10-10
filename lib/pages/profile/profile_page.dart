@@ -29,14 +29,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        onPressed: () {},
-        child: CircleAvatar(
-          radius: 20,
-          child: Icon(Icons.edit),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   mini: true,
+      //   onPressed: () {},
+      //   child: CircleAvatar(
+      //     radius: 20,
+      //     child: Icon(Icons.edit),
+      //   ),
+      // ),
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -50,16 +50,38 @@ class _ProfilePageState extends State<ProfilePage> {
               Color(0xff68b9b3),
               Color(0xff6491d3)
             ])),
-            child: Container(
-                margin: EdgeInsets.only(top: maxHeight * 0.08),
-                child: Text('Thông Tin Cá Nhân',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 22, color: Colors.white))),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20,60,20,0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+
+                  ),
+                  Container(
+                      child: Text('Thông tin cá nhân',style: TextStyle(fontSize: 22, color: Colors.white))
+                  ),
+                  FloatingActionButton(
+                    mini: true,
+                    onPressed: () {},
+                    child: CircleAvatar(
+                      radius: 20,
+                      child: Icon(Icons.edit),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // child: Container(
+            //     margin: EdgeInsets.only(top: maxHeight * 0.08),
+            //     child: Text('Thông Tin Cá Nhân',
+            //         textAlign: TextAlign.center,
+            //         style: TextStyle(fontSize: 22, color: Colors.white))),
           ),
           //Text field Container
           Container(
             width: double.infinity,
-            // height: maxHei,
             margin: EdgeInsets.only(top: maxHeight * 0.2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -74,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20, top: maxHeight * 0.11),
+                  padding: EdgeInsets.only(bottom: 20, top: 80),
                   child: Text(
                     '${dataProfile[0].fullName ?? "No data"}',
                     style: TextStyle(
@@ -140,11 +162,15 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 CircleAvatar(
                   radius: 70,
+                  // radius: maxWidth*0.18,
                   backgroundColor: Color(0xff6491d3),
                   child: CircleAvatar(
                     radius: 65,
+                    // radius: maxWidth*0.17,
                     backgroundColor: Colors.white,
                     child: SizedBox(
+                        // height: maxHeight*0.2,
+                        // width: maxWidth*0.25,
                         height: 100,
                         width: 100,
                         child: Image.asset(

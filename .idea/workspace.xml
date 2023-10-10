@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
@@ -7,12 +12,9 @@
     <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/item_details_common.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/item_details_common.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/note_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/note_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/task_widget/task_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/task_widget/task_item.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/task_page/detail_task_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/task_page/detail_task_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

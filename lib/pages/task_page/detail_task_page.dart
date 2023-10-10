@@ -40,11 +40,11 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
         scrollDirection: Axis.vertical,
         physics: ScrollPhysics(),
         child: Container(
+          height: maxHeight,
           color: Colors.grey[300],
           child: Column(
             children: [
               Container(
-                // color: Colors.grey[300],
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
@@ -101,6 +101,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         tittle: 'Kỹ thuật viên',
                         description: widget.profileData[0].fullName ?? "",
                         onTap: () {}),
+
                     (_item.chatContent!.isEmpty)
                         ? NoteDetail(
                       colorTitle:Color(0xFFFFCE48),

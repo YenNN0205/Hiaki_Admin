@@ -52,7 +52,7 @@ class _ItemDetailCommonState extends State<ItemDetailCommon> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(8),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

@@ -45,7 +45,8 @@ class _taskItemState extends State<taskItem> {
             ),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                 Row(
                   children: [
                     CircleAvatar(
@@ -55,19 +56,24 @@ class _taskItemState extends State<taskItem> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 24),
-                      child: Text(
-                        widget.request,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                      padding: EdgeInsets.only(left: 8),
+                      child: Container(
+                        width: maxWidth*0.38,
+                        child: Text(
+                          widget.request,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
                       ),
                     ),
                   ],
                 ),
                 statusTask(tittle: widget.status)
-              ]),
+              ],
+              ),
               Container(
                 margin: const EdgeInsets.only(top: 12, bottom: 12),
                 height: 1,
@@ -94,10 +100,19 @@ class _taskItemState extends State<taskItem> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
+                      if (widget.status == "Open")
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18),
+                          child: buttonTask(
+                              colorBg: Colors.white,
+                              colorText: Colors.black,
+                              onTap: () => yesNoDialog("Từ chối hỗ trợ"),
+                              tittle: "Từ chối"),
+                        )
                     ],
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const Text(
                         'Địa chỉ',
@@ -108,37 +123,29 @@ class _taskItemState extends State<taskItem> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 6.0),
-                        width: maxWidth * 0.5 - 48,
+                        width: maxWidth * 0.3 ,
                         child: Text(
-                          widget.address,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          widget.address,textAlign: TextAlign.end,
+                          style: TextStyle(fontWeight: FontWeight.bold,),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
+                      if (widget.status == "Open")
+                        Padding(
+                          padding: const EdgeInsets.only(top: 18),
+                          child: buttonTask(
+                              colorBg: const Color(0xFF003B40),
+                              colorText: const Color.fromARGB(255, 248, 245, 245),
+                              onTap: () => yesNoDialog("Tiếp nhận hỗ trợ"),
+                              tittle: "Chấp nhận"),
+                        )
                     ],
+
                   ),
                 ],
               ),
-              if (widget.status == "Open")
-                Padding(
-                  padding: const EdgeInsets.only(top: 18),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buttonTask(
-                          colorBg: Colors.white,
-                          colorText: Colors.black,
-                          onTap: () => yesNoDialog("Từ chối hỗ trợ"),
-                          tittle: "Từ chối"),
-                      buttonTask(
-                          colorBg: const Color(0xFF003B40),
-                          colorText: const Color.fromARGB(255, 248, 245, 245),
-                          onTap: () => yesNoDialog("Tiếp nhận hỗ trợ"),
-                          tittle: "Chấp nhận"),
-                    ],
-                  ),
-                )
-              else if (widget.status == "On progressing")
+
+               if (widget.status == "On progressing")
                 Padding(
                   padding: const EdgeInsets.only(top: 18),
                   child: buttonCommon(
@@ -147,7 +154,8 @@ class _taskItemState extends State<taskItem> {
                       onTap: () => yesNoDialog("Xác nhận Hoàn thành"),
                       tittle: "Hoàn thành"),
                 )
-            ]),
+            ],
+                ),
           ),
         ),
       ],
