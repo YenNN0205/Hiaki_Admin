@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
@@ -105,12 +103,16 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         onTap: () {}),
                     (_item.chatContent!.isEmpty)
                         ? NoteDetail(
+                      colorTitle:Color(0xFFFFCE48),
+                            colorContent: Color(0xFFF5F2C6),
                             content: "",
                             date: "",
                           )
                         : SizedBox(),
                     ...List.generate(_item.chatContent!.length, (index) {
                       return NoteDetail(
+                        colorTitle:Color(0xFFFFCE48),
+                        colorContent: Color(0xFFF5F2C6),
                         content: _item.chatContent![index].content ?? "",
                         date: _item.chatContent![index].date ?? "",
                       );
@@ -189,6 +191,9 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                 Container(
                   margin: EdgeInsets.only(left: 24, right: 24, bottom: 24),
                   child: NoteDetail(
+                    //8CE88C
+                    colorTitle: Color(0xFFAAFF90),
+                    colorContent: Color(0xFFDBFDDB),
                     content: "",
                     title: "(của kỹ thuật viên)",
                   ),

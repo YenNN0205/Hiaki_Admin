@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 Padding profileTextField(
     {required String text,
-    int? textLength,
     required Icon iconTextField,
     required TextInputType textType,
     required String hintText,
@@ -17,7 +16,6 @@ Padding profileTextField(
         readOnly: true,
         keyboardType: textType,
         controller: textController,
-        maxLength: textLength,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.black54),
           labelText: hintText,
@@ -45,25 +43,3 @@ Padding profileTextField(
         )),
   );
 }
-
-
-
-
-// Container profileTextField({required TextEditingController textController,required Icon iconTextfield,required String hintText,required bool obscureText}) {
-//   return Container(
-//     padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
-//     decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(5),
-//         border: Border.all(color: Colors.red)
-//     ),
-//     child: TextField(
-//
-//       decoration: InputDecoration(
-//         border: InputBorder.none,
-//         hintText: 'ssas',
-//         labelText: hintText,
-//       ),
-//       controller: textController,
-//     ),
-//   );
-// }

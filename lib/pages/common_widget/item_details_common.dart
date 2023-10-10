@@ -27,7 +27,7 @@ class _ItemDetailCommonState extends State<ItemDetailCommon> {
             height: maxHeight*0.09,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                    stops:  [0.025, 0.02],
+                    stops:  [0.015, 0.02],
                     // colors: [Colors.red, Colors.white]
                     colors: [widget.colorBorder, Colors.white],
                 ),
@@ -52,7 +52,7 @@ class _ItemDetailCommonState extends State<ItemDetailCommon> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(25),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

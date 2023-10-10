@@ -104,7 +104,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 profileTextField(
                     text: "${dataProfile[0].phoneNumber ?? "No data"}",
                     hintText: 'Số Điện Thoại',
-                    textLength: 10,
                     textType: TextInputType.number,
                     iconTextField: Icon(
                       Icons.phone,
