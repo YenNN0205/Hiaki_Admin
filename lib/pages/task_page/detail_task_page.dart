@@ -1,16 +1,19 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:hiaki_admin/pages/common_widget/item_details_common.dart';
 
 import '../../utils/data_bucket.dart';
+import '../../utils/networking.dart';
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/note_detail.dart';
 import '../common_widget/task_widget/button_task.dart';
 import '../common_widget/task_widget/status_task.dart';
 import '../common_widget/yesno_dialog.dart';
+import 'task_page.dart';
 
 class DetailTaskPage extends StatefulWidget {
   final SupportList item;
@@ -23,6 +26,7 @@ class DetailTaskPage extends StatefulWidget {
 }
 
 class _DetailTaskPageState extends State<DetailTaskPage> {
+  final content = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final double maxHeight = MediaQuery.of(context).size.height;
@@ -134,6 +138,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                               fontSize: 17, fontWeight: FontWeight.w500),
                         ),
                         TextFormField(
+                          controller: content,
                           minLines: 2,
                           maxLines: null,
                           keyboardType: TextInputType.multiline,
@@ -160,14 +165,41 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                 buttonTask(
                                     colorBg: Colors.white,
                                     colorText: Colors.black,
-                                    onTap: () => yesNoDialog("Từ chối hỗ trợ"),
+                                    onTap: () async {
+                                      var result =
+                                          await yesNoDialog("Từ chối hỗ trợ");
+
+                                      if (result == "true") {
+                                        Networking.getInstance()
+                                            .updateStatus(UpdateStatus(
+                                                maintenanceID:
+                                                    widget.item.maintenanceID,
+                                                status: "Reject",
+                                                content: ""))
+                                            .then((value) =>
+                                                printInfo(info: value));
+                                      }
+                                    },
                                     tittle: "Từ chối"),
                                 buttonTask(
                                     colorBg: const Color(0xFF003B40),
                                     colorText: const Color.fromARGB(
                                         255, 248, 245, 245),
-                                    onTap: () =>
-                                        yesNoDialog("Tiếp nhận hỗ trợ"),
+                                    onTap: () async {
+                                      var result =
+                                          await yesNoDialog("Tiếp nhận hỗ trợ");
+
+                                      if (result == "true") {
+                                        Networking.getInstance()
+                                            .updateStatus(UpdateStatus(
+                                                maintenanceID:
+                                                    widget.item.maintenanceID,
+                                                status: "On progressing",
+                                                content: ""))
+                                            .then((value) =>
+                                                printInfo(info: value));
+                                      }
+                                    },
                                     tittle: "Chấp nhận"),
                               ],
                             ),
@@ -178,7 +210,21 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                             child: buttonCommon(
                                 maxWidth: maxWidth * 0.7,
                                 height: 32,
-                                onTap: () => yesNoDialog("Xác nhận Hoàn thành"),
+                                onTap: () async {
+                                  var result =
+                                      await yesNoDialog("Xác nhận Hoàn thành");
+
+                                  if (result == "true") {
+                                    Networking.getInstance()
+                                        .updateStatus(UpdateStatus(
+                                            maintenanceID:
+                                                widget.item.maintenanceID,
+                                            status: "Done",
+                                            content: content.text))
+                                        .then(
+                                            (value) => printInfo(info: value));
+                                  }
+                                },
                                 tittle: "Hoàn thành"),
                           ),
                       ],

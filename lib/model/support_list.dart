@@ -53,3 +53,25 @@ class UserProfileModel {
       this.phoneNumber,
       this.address});
 }
+
+class UpdateStatus {
+  String? maintenanceID;
+  String? status;
+  String? content;
+
+  UpdateStatus({this.maintenanceID, this.status, this.content});
+
+  UpdateStatus.fromJson(Map<String, dynamic> json) {
+    maintenanceID = json['MaintenanceID'];
+    status = json['Status'];
+    content = json['Content'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['MaintenanceID'] = maintenanceID;
+    data['Status'] = status;
+    data['Content'] = content;
+    return data;
+  }
+}
