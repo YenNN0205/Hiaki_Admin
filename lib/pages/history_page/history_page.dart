@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hiaki_admin/controllers/update_list_controller.dart';
 
 import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
@@ -11,9 +13,9 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   final dataSupportHistory = DataBucket.getInstance().getSupportHistory();
+  final controller = Get.put(TaskListController());
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -29,11 +31,11 @@ class _HistoryPageState extends State<HistoryPage> {
           )),
           flexibleSpace: const GradientAppBarColor(),
         ),
-        body: ListView.builder(
+        body: Obx(() => ListView.builder(
             padding: EdgeInsets.only(top: 12),
-            itemCount: dataSupportHistory.length,
+            itemCount: controller.listDone.length,
             itemBuilder: (BuildContext context, int index) {
-              final item = dataSupportHistory[index];
+              final item = controller.listDone[index];
               return taskItem(
                 item: item,
                 status: item.status ?? "",
@@ -41,6 +43,6 @@ class _HistoryPageState extends State<HistoryPage> {
                 timeSchedule: item.timeSchedule ?? "",
                 address: item.address ?? "",
               );
-            }));
+            })));
   }
 }

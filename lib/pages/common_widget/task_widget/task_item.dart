@@ -3,6 +3,8 @@ import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/task_page/detail_task_page.dart';
+import '../../../controllers/update_list_controller.dart';
+import '../../../utils/networking.dart';
 import '../yesno_dialog.dart';
 import 'button_task.dart';
 import 'status_task.dart';
@@ -27,6 +29,7 @@ class taskItem extends StatefulWidget {
 }
 
 class _taskItemState extends State<taskItem> {
+  final controller = Get.put(TaskListController());
   @override
   Widget build(BuildContext context) {
     var maxWidth = MediaQuery.sizeOf(context).width;
@@ -43,119 +46,140 @@ class _taskItemState extends State<taskItem> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
             ),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CircleAvatar(
-                      child: Image.asset(
-                        'assets/setting.png',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8),
-                      child: Container(
-                        width: maxWidth*0.38,
-                        child: Text(
-                          widget.request,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          child: Image.asset(
+                            'assets/setting.png',
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: Container(
+                            width: maxWidth * 0.38,
+                            child: Text(
+                              widget.request,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    statusTask(tittle: widget.status)
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 12, bottom: 12),
+                  height: 1,
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 91, 91, 91)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Thời gian',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(221, 88, 87, 87),
+                              fontSize: 14),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 6.0),
+                          child: Text(
+                            widget.timeSchedule,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        if (widget.status == "Open")
+                          Padding(
+                            padding: const EdgeInsets.only(top: 18),
+                            child: buttonTask(
+                                colorBg: Colors.white,
+                                colorText: Colors.black,
+                                onTap: () async {
+                                  await controller.reloadData(
+                                      maintenanceID:
+                                          widget.item.maintenanceID ?? "",
+                                      titleDialog: "Từ chối hỗ trợ",
+                                      status: "Reject");
+                                },
+                                tittle: "Từ chối"),
+                          )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text(
+                          'Địa chỉ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(221, 88, 87, 87),
+                              fontSize: 14),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 6.0),
+                          width: maxWidth * 0.3,
+                          child: Text(
+                            widget.address,
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (widget.status == "Open")
+                          Padding(
+                            padding: const EdgeInsets.only(top: 18),
+                            child: buttonTask(
+                                colorBg: const Color(0xFF003B40),
+                                colorText:
+                                    const Color.fromARGB(255, 248, 245, 245),
+                                onTap: () async {
+                                  await controller.reloadData(
+                                      maintenanceID:
+                                          widget.item.maintenanceID ?? "",
+                                      titleDialog: "Tiếp nhận hỗ trợ",
+                                      status: "On progressing");
+                                },
+                                tittle: "Chấp nhận"),
+                          )
+                      ],
                     ),
                   ],
                 ),
-                statusTask(tittle: widget.status)
+                if (widget.status == "On progressing")
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18),
+                    child: buttonCommon(
+                        maxWidth: maxWidth * 0.7,
+                        height: 32,
+                        onTap: () async {
+                          await controller.reloadData(
+                              maintenanceID: widget.item.maintenanceID ?? "",
+                              titleDialog: "Xác nhận hoàn thành",
+                              status: "Done");
+                        },
+                        tittle: "Hoàn thành"),
+                  )
               ],
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 12, bottom: 12),
-                height: 1,
-                decoration:
-                    const BoxDecoration(color: Color.fromARGB(255, 91, 91, 91)),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Thời gian',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(221, 88, 87, 87),
-                            fontSize: 14),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 6.0),
-                        child: Text(
-                          widget.timeSchedule,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      if (widget.status == "Open")
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: buttonTask(
-                              colorBg: Colors.white,
-                              colorText: Colors.black,
-                              onTap: () => yesNoDialog("Từ chối hỗ trợ"),
-                              tittle: "Từ chối"),
-                        )
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Địa chỉ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(221, 88, 87, 87),
-                            fontSize: 14),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 6.0),
-                        width: maxWidth * 0.3 ,
-                        child: Text(
-                          widget.address,textAlign: TextAlign.end,
-                          style: TextStyle(fontWeight: FontWeight.bold,),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      if (widget.status == "Open")
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: buttonTask(
-                              colorBg: const Color(0xFF003B40),
-                              colorText: const Color.fromARGB(255, 248, 245, 245),
-                              onTap: () => yesNoDialog("Tiếp nhận hỗ trợ"),
-                              tittle: "Chấp nhận"),
-                        )
-                    ],
-
-                  ),
-                ],
-              ),
-
-               if (widget.status == "On progressing")
-                Padding(
-                  padding: const EdgeInsets.only(top: 18),
-                  child: buttonCommon(
-                      maxWidth: maxWidth * 0.7,
-                      height: 32,
-                      onTap: () => yesNoDialog("Xác nhận Hoàn thành"),
-                      tittle: "Hoàn thành"),
-                )
-            ],
-                ),
+            ),
           ),
         ),
       ],
