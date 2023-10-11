@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/update_list_controller.dart';
 import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/task_widget/task_item.dart';
 
-class TasksPage extends StatelessWidget {
+class TasksPage extends StatefulWidget {
+  @override
+  State<TasksPage> createState() => _TasksPageState();
+}
+
+class _TasksPageState extends State<TasksPage> {
+  final controller = Get.put(TaskListController());
+
   final dataSupportPending = DataBucket.getInstance().getSupportPending();
+
   final dataSupportProgress = DataBucket.getInstance().getSupportProgress();
+
+  @override
+  void initState() {
+    controller.getTaskList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,30 +75,38 @@ class TasksPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: TabBarView(children: [
-                    ListView.builder(
-                        itemCount: dataSupportPending.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item = dataSupportPending[index];
-                          return taskItem(
-                            item: item,
-                            status: item.status ?? "",
-                            request: item.request ?? "",
-                            timeSchedule: item.timeSchedule ?? "",
-                            address: item.address ?? "",
-                          );
-                        }),
-                    ListView.builder(
-                        itemCount: dataSupportProgress.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final item = dataSupportProgress[index];
-                          return taskItem(
-                            item: item,
-                            status: item.status ?? "",
-                            request: item.request ?? "",
-                            timeSchedule: item.timeSchedule ?? "",
-                            address: item.address ?? "",
-                          );
-                        }),
+                    Obx(
+                      () => ListView.builder(
+                          itemCount: controller.listPending.length,
+                          // itemCount: dataSupportPending.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = controller.listPending[index];
+                            // final item = dataSupportPending[index];
+                            return taskItem(
+                              item: item,
+                              status: item.status ?? "",
+                              request: item.request ?? "",
+                              timeSchedule: item.timeSchedule ?? "",
+                              address: item.address ?? "",
+                            );
+                          }),
+                    ),
+                    Obx(
+                      () => ListView.builder(
+                          itemCount: controller.listProgress.length,
+                          // itemCount: dataSupportProgress.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = controller.listProgress[index];
+                            // final item = dataSupportProgress[index];
+                            return taskItem(
+                              item: item,
+                              status: item.status ?? "",
+                              request: item.request ?? "",
+                              timeSchedule: item.timeSchedule ?? "",
+                              address: item.address ?? "",
+                            );
+                          }),
+                    ),
                   ]),
                 ),
               ],

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hiaki_admin/controllers/update_list_controller.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 
 import '../controllers/controller.dart';
@@ -86,6 +87,7 @@ class DataBucket {
   List<SupportList> getSupportProgress() => listSupportProgress;
 
   void setSupportProgress(dynamic fecthSupportData) {
+    final taskListController = Get.put(TaskListController());
     listSupportProgress = [];
     for (var item in fecthSupportData) {
       var device = item['Device'];
@@ -126,6 +128,7 @@ class DataBucket {
             address: address));
       }
     }
+    taskListController.listProgress.value = listSupportProgress;
   }
 
   List<SupportList> listSupportHistory = [];

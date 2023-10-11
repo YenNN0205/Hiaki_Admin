@@ -49,6 +49,28 @@ class Networking {
     }
   }
 
+  Future<dynamic> reloadMetadata() async {
+    String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
+    Map<String, String> requestHeaders = {'authorization': basicAuth};
+
+    final response = await http.get(Uri.parse('$_host/V1/metadata_admin'),
+        headers: requestHeaders);
+
+    if (response.statusCode == 200) {
+      dynamic value = jsonDecode(response.body);
+      dynamic dataUser = value['Metadata'][1]['UserName'][0];
+      DataBucket.getInstance().setDataProfile(dataUser);
+      dynamic dataSupport = value['Metadata'][0]['SupportList'];
+      DataBucket.getInstance().setSupportPending(dataSupport);
+      DataBucket.getInstance().setSupportProgress(dataSupport);
+      DataBucket.getInstance().setSupportHistory(dataSupport);
+      return response.statusCode;
+    } else {
+      return response.statusCode;
+    }
+  }
+
   void setAccount({String username = "", String password = ""}) {
     _userName = username;
     _password = password;

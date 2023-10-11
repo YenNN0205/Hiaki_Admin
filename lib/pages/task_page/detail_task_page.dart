@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hiaki_admin/controllers/update_list_controller.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:hiaki_admin/pages/common_widget/item_details_common.dart';
@@ -26,6 +27,7 @@ class DetailTaskPage extends StatefulWidget {
 
 class _DetailTaskPageState extends State<DetailTaskPage> {
   final content = TextEditingController();
+  final controller = Get.put(TaskListController());
   @override
   Widget build(BuildContext context) {
     final double maxHeight = MediaQuery.of(context).size.height;
@@ -109,7 +111,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
 
                     (_item.chatContent!.isEmpty)
                         ? NoteDetail(
-                      colorTitle:Color(0xFFFFCE48),
+                            colorTitle: Color(0xFFFFCE48),
                             colorContent: Color(0xFFF5F2C6),
                             content: "",
                             date: "",
@@ -117,7 +119,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         : SizedBox(),
                     ...List.generate(_item.chatContent!.length, (index) {
                       return NoteDetail(
-                        colorTitle:Color(0xFFFFCE48),
+                        colorTitle: Color(0xFFFFCE48),
                         colorContent: Color(0xFFF5F2C6),
                         content: _item.chatContent![index].content ?? "",
                         date: _item.chatContent![index].date ?? "",
@@ -170,28 +172,12 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                     colorBg: Colors.white,
                                     colorText: Colors.black,
                                     onTap: () async {
-                                      var result =
-                                          await yesNoDialog("Từ chối hỗ trợ");
-
-                                      if (result == "true") {
-                                        final update =
-                                            await Networking.getInstance()
-                                                .updateStatus(UpdateStatus(
-                                                    maintenanceID: widget
-                                                        .item.maintenanceID,
-                                                    status: "Reject",
-                                                    content: ""));
-                                        if (update == "Success") {
-                                          Navigator.pushAndRemoveUntil<void>(
-                                            context,
-                                            MaterialPageRoute<void>(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        MainPage()),
-                                            ModalRoute.withName('/'),
-                                          );
-                                        }
-                                      }
+                                      await controller.reloadData(
+                                          maintenanceID:
+                                              widget.item.maintenanceID ?? "",
+                                          titleDialog: "Từ chối hỗ trợ",
+                                          status: "Reject",
+                                          isDetail: true);
                                     },
                                     tittle: "Từ chối"),
                                 buttonTask(
@@ -199,28 +185,12 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                     colorText: const Color.fromARGB(
                                         255, 248, 245, 245),
                                     onTap: () async {
-                                      var result =
-                                          await yesNoDialog("Tiếp nhận hỗ trợ");
-
-                                      if (result == "true") {
-                                        final update =
-                                            await Networking.getInstance()
-                                                .updateStatus(UpdateStatus(
-                                                    maintenanceID: widget
-                                                        .item.maintenanceID,
-                                                    status: "On progressing",
-                                                    content: ""));
-                                        if (update == "Success") {
-                                          Navigator.pushAndRemoveUntil<void>(
-                                            context,
-                                            MaterialPageRoute<void>(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        MainPage()),
-                                            ModalRoute.withName('/'),
-                                          );
-                                        }
-                                      }
+                                      await controller.reloadData(
+                                          maintenanceID:
+                                              widget.item.maintenanceID ?? "",
+                                          titleDialog: "Tiếp nhận hỗ trợ",
+                                          status: "On progressing",
+                                          isDetail: true);
                                     },
                                     tittle: "Chấp nhận"),
                               ],
@@ -233,27 +203,13 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                 maxWidth: maxWidth * 0.7,
                                 height: 32,
                                 onTap: () async {
-                                  var result =
-                                      await yesNoDialog("Xác nhận Hoàn thành");
-
-                                  if (result == "true") {
-                                    final update =
-                                        await Networking.getInstance()
-                                            .updateStatus(UpdateStatus(
-                                                maintenanceID:
-                                                    widget.item.maintenanceID,
-                                                status: "Done",
-                                                content: content.text));
-                                    if (update == "Success") {
-                                      Navigator.pushAndRemoveUntil<void>(
-                                        context,
-                                        MaterialPageRoute<void>(
-                                            builder: (BuildContext context) =>
-                                                MainPage()),
-                                        ModalRoute.withName('/'),
-                                      );
-                                    }
-                                  }
+                                  await controller.reloadData(
+                                      maintenanceID:
+                                          widget.item.maintenanceID ?? "",
+                                      titleDialog: "Xác nhận hoàn thành",
+                                      status: "Done",
+                                      content: content.text,
+                                      isDetail: true);
                                 },
                                 tittle: "Hoàn thành"),
                           ),
