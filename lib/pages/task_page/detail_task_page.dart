@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/model/support_list.dart';
@@ -47,11 +45,11 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
         scrollDirection: Axis.vertical,
         physics: ScrollPhysics(),
         child: Container(
+          height: maxHeight,
           color: Colors.grey[300],
           child: Column(
             children: [
               Container(
-                // color: Colors.grey[300],
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
@@ -108,14 +106,19 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         tittle: 'Kỹ thuật viên',
                         description: widget.profileData[0].fullName ?? "",
                         onTap: () {}),
+
                     (_item.chatContent!.isEmpty)
                         ? NoteDetail(
+                      colorTitle:Color(0xFFFFCE48),
+                            colorContent: Color(0xFFF5F2C6),
                             content: "",
                             date: "",
                           )
                         : SizedBox(),
                     ...List.generate(_item.chatContent!.length, (index) {
                       return NoteDetail(
+                        colorTitle:Color(0xFFFFCE48),
+                        colorContent: Color(0xFFF5F2C6),
                         content: _item.chatContent![index].content ?? "",
                         date: _item.chatContent![index].date ?? "",
                       );
@@ -262,6 +265,9 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                 Container(
                   margin: EdgeInsets.only(left: 24, right: 24, bottom: 24),
                   child: NoteDetail(
+                    //8CE88C
+                    colorTitle: Color(0xFFAAFF90),
+                    colorContent: Color(0xFFDBFDDB),
                     content: "",
                     title: "(của kỹ thuật viên)",
                   ),

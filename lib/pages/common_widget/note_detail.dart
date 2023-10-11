@@ -4,11 +4,15 @@ class NoteDetail extends StatelessWidget {
   final String content;
   final String? date;
   final String title;
+  final Color colorTitle;
+  final Color colorContent;
 
   const NoteDetail(
       {super.key,
       required this.content,
       this.date,
+        required this.colorContent,
+      required this.colorTitle,
       this.title = "(của khách hàng)"});
 
   @override
@@ -22,7 +26,8 @@ class NoteDetail extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(10),
-              color: Colors.yellow[400],
+              // color: Colors.yellow[400],
+              color: colorTitle,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -51,7 +56,8 @@ class NoteDetail extends StatelessWidget {
             Container(
               width: maxWidth,
               padding: EdgeInsets.all(12),
-              color: Colors.yellow[100],
+              // color: Colors.yellow[100],
+              color: colorContent,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
