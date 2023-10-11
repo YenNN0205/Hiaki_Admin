@@ -28,14 +28,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      // floatingActionButton: FloatingActionButton(
-      //   mini: true,
-      //   onPressed: () {},
-      //   child: CircleAvatar(
-      //     radius: 20,
-      //     child: Icon(Icons.edit),
-      //   ),
-      // ),
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -56,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-
+                    width: maxWidth*0.072,
                   ),
                   Container(
                       child: Text('Thông tin cá nhân',style: TextStyle(fontSize: 22, color: Colors.white))
@@ -72,13 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            // child: Container(
-            //     margin: EdgeInsets.only(top: maxHeight * 0.08),
-            //     child: Text('Thông Tin Cá Nhân',
-            //         textAlign: TextAlign.center,
-            //         style: TextStyle(fontSize: 22, color: Colors.white))),
           ),
-          //Text field Container
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: maxHeight * 0.2),

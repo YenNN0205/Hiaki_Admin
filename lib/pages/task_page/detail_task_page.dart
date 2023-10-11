@@ -45,7 +45,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
         scrollDirection: Axis.vertical,
         physics: ScrollPhysics(),
         child: Container(
-          height: maxHeight,
+          // height: maxHeight,
           color: Colors.grey[300],
           child: Column(
             children: [
