@@ -3,6 +3,8 @@ import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/task_page/detail_task_page.dart';
+import 'package:hiaki_admin/pages/task_page/task_page.dart';
+import 'package:hiaki_admin/utils/networking.dart';
 import '../yesno_dialog.dart';
 import 'button_task.dart';
 import 'status_task.dart';
@@ -151,7 +153,18 @@ class _taskItemState extends State<taskItem> {
                   child: buttonCommon(
                       maxWidth: maxWidth * 0.7,
                       height: 32,
-                      onTap: () => yesNoDialog("Xác nhận Hoàn thành"),
+                      onTap: () async {
+                        var result = await yesNoDialog("Xác nhận Hoàn thành");
+                        // print("ontap " + result);
+                        if (result == "true") {
+                          Networking.getInstance()
+                              .updateStatus(UpdateStatus(
+                                  maintenanceID: widget.item.maintenanceID,
+                                  status: "Done",
+                                  content: ""))
+                              .then((value) => printInfo(info: value));
+                        }
+                      },
                       tittle: "Hoàn thành"),
                 )
             ],

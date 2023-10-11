@@ -13,8 +13,8 @@ class Networking {
 
   // Need to be changed
   var _host = 'http://103.157.218.115/Hiaki_Client/hs/Hiaki_Client/';
-  var _userName = 'Administrator';
-  final _password = '';
+  String _userName = 'Administrator';
+  String _password = '';
 
   Networking setHost(String host) {
     _host = host;
@@ -35,6 +35,7 @@ class Networking {
         headers: requestHeaders);
 
     if (response.statusCode == 200) {
+      setAccount(username: userName, password: password);
       dynamic value = jsonDecode(response.body);
       dynamic dataUser = value['Metadata'][1]['UserName'][0];
       DataBucket.getInstance().setDataProfile(dataUser);
@@ -45,6 +46,27 @@ class Networking {
       return response.statusCode;
     } else {
       return response.statusCode;
+    }
+  }
+
+  void setAccount({String username = "", String password = ""}) {
+    _userName = username;
+    _password = password;
+  }
+
+  Future<String> updateStatus(UpdateStatus object) async {
+    String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
+    Map<String, String> requestHeaders = {'authorization': basicAuth};
+    // http: //103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery/V1/CoffeeProduct?CoffeeProductCode=0001
+
+    final response = await http.put(Uri.parse('$_host/V1/maintenance_admin'),
+        headers: requestHeaders, body: jsonEncode(object.toJson()));
+
+    if (response.statusCode == 200) {
+      return "Success";
+    } else {
+      return response.statusCode.toString();
     }
   }
 
@@ -83,18 +105,5 @@ class Networking {
     } else {
       return response.statusCode;
     }
-  }
-
-  Future<dynamic> updateProduct(String code, var object) async {
-    // String basicAuth =
-    //     'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
-    // Map<String, String> requestHeaders = {'authorization': basicAuth};
-    // http: //103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery/V1/CoffeeProduct?CoffeeProductCode=0001
-
-    final response = await http.put(
-        Uri.parse('$_host/V1/CoffeeProduct?CoffeeProductCode=$code'),
-        body: object);
-
-    return response.statusCode;
   }
 }
