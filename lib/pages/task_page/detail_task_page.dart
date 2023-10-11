@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:hiaki_admin/pages/common_widget/item_details_common.dart';
+import 'package:hiaki_admin/pages/main_page.dart';
 
 import '../../utils/data_bucket.dart';
 import '../../utils/networking.dart';
@@ -170,14 +171,23 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                           await yesNoDialog("Từ chối hỗ trợ");
 
                                       if (result == "true") {
-                                        Networking.getInstance()
-                                            .updateStatus(UpdateStatus(
-                                                maintenanceID:
-                                                    widget.item.maintenanceID,
-                                                status: "Reject",
-                                                content: ""))
-                                            .then((value) =>
-                                                printInfo(info: value));
+                                        final update =
+                                            await Networking.getInstance()
+                                                .updateStatus(UpdateStatus(
+                                                    maintenanceID: widget
+                                                        .item.maintenanceID,
+                                                    status: "Reject",
+                                                    content: ""));
+                                        if (update == "Success") {
+                                          Navigator.pushAndRemoveUntil<void>(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        MainPage()),
+                                            ModalRoute.withName('/'),
+                                          );
+                                        }
                                       }
                                     },
                                     tittle: "Từ chối"),
@@ -190,14 +200,23 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                           await yesNoDialog("Tiếp nhận hỗ trợ");
 
                                       if (result == "true") {
-                                        Networking.getInstance()
-                                            .updateStatus(UpdateStatus(
-                                                maintenanceID:
-                                                    widget.item.maintenanceID,
-                                                status: "On progressing",
-                                                content: ""))
-                                            .then((value) =>
-                                                printInfo(info: value));
+                                        final update =
+                                            await Networking.getInstance()
+                                                .updateStatus(UpdateStatus(
+                                                    maintenanceID: widget
+                                                        .item.maintenanceID,
+                                                    status: "On progressing",
+                                                    content: ""));
+                                        if (update == "Success") {
+                                          Navigator.pushAndRemoveUntil<void>(
+                                            context,
+                                            MaterialPageRoute<void>(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        MainPage()),
+                                            ModalRoute.withName('/'),
+                                          );
+                                        }
                                       }
                                     },
                                     tittle: "Chấp nhận"),
@@ -215,14 +234,22 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                                       await yesNoDialog("Xác nhận Hoàn thành");
 
                                   if (result == "true") {
-                                    Networking.getInstance()
-                                        .updateStatus(UpdateStatus(
-                                            maintenanceID:
-                                                widget.item.maintenanceID,
-                                            status: "Done",
-                                            content: content.text))
-                                        .then(
-                                            (value) => printInfo(info: value));
+                                    final update =
+                                        await Networking.getInstance()
+                                            .updateStatus(UpdateStatus(
+                                                maintenanceID:
+                                                    widget.item.maintenanceID,
+                                                status: "Done",
+                                                content: content.text));
+                                    if (update == "Success") {
+                                      Navigator.pushAndRemoveUntil<void>(
+                                        context,
+                                        MaterialPageRoute<void>(
+                                            builder: (BuildContext context) =>
+                                                MainPage()),
+                                        ModalRoute.withName('/'),
+                                      );
+                                    }
                                   }
                                 },
                                 tittle: "Hoàn thành"),

@@ -15,7 +15,9 @@ Future<String> yesNoDialog(String title) async {
       backgroundColor: Colors.grey.shade100,
       cancelTextColor: Colors.red,
       confirmTextColor: Colors.white,
-      onConfirm: () => Get.back(result: "true"));
+      onConfirm: () {
+        Get.back(result: "true");
+      });
 
   return result ?? "";
 }
