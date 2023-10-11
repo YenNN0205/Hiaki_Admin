@@ -4,7 +4,6 @@ import 'package:hiaki_admin/pages/authentications/authentication.dart';
 import 'package:hiaki_admin/pages/common_widget/common.dart';
 import 'package:hiaki_admin/utils/data_bucket.dart';
 
-import '../common_widget/gradient_app_bar.dart';
 import '../common_widget/profile_text_field.dart';
 
 class ProfilePage extends StatefulWidget {

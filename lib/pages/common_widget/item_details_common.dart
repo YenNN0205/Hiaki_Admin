@@ -17,7 +17,7 @@ class _ItemDetailCommonState extends State<ItemDetailCommon> {
   Widget build(BuildContext context) {
 
     final double maxHeight = MediaQuery.of(context).size.height;
-    // final double maxWidth = MediaQuery.of(context).size.width;
+    final double maxWidth = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 10),
@@ -40,7 +40,7 @@ class _ItemDetailCommonState extends State<ItemDetailCommon> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                    padding: const EdgeInsets.only(left: 20),
                     child: Text(
                       widget.tittle,
                       style: const TextStyle(
