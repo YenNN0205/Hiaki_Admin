@@ -19,6 +19,8 @@ class _HistoryPageState extends State<HistoryPage> {
     super.initState();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +33,24 @@ class _HistoryPageState extends State<HistoryPage> {
           )),
           flexibleSpace: const GradientAppBarColor(),
         ),
-        body: Obx(() => ListView.builder(
-            padding: EdgeInsets.only(top: 12),
-            itemCount: controller.listDone.length,
-            itemBuilder: (BuildContext context, int index) {
-              final item = controller.listDone[index];
-              return taskItem(
-                item: item,
-                status: item.status ?? "",
-                request: item.request ?? "",
-                timeSchedule: item.timeSchedule ?? "",
-                address: item.address ?? "",
-              );
-            })));
+        body: Obx(() => RefreshIndicator(
+          onRefresh: ()=> controller.refresh(),
+          edgeOffset: 0,
+          color: Colors.lightBlue,
+          backgroundColor: Colors.white,
+          child: ListView.builder(
+              padding: EdgeInsets.only(top: 12),
+              itemCount: controller.listDone.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = controller.listDone[index];
+                return taskItem(
+                  item: item,
+                  status: item.status ?? "",
+                  request: item.request ?? "",
+                  timeSchedule: item.timeSchedule ?? "",
+                  address: item.address ?? "",
+                );
+              }),
+        )));
   }
 }

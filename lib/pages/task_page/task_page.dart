@@ -76,36 +76,48 @@ class _TasksPageState extends State<TasksPage> {
                 Expanded(
                   child: TabBarView(children: [
                     Obx(
-                      () => ListView.builder(
-                          itemCount: controller.listPending.length,
-                          // itemCount: dataSupportPending.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = controller.listPending[index];
-                            // final item = dataSupportPending[index];
-                            return taskItem(
-                              item: item,
-                              status: item.status ?? "",
-                              request: item.request ?? "",
-                              timeSchedule: item.timeSchedule ?? "",
-                              address: item.address ?? "",
-                            );
-                          }),
+                      () => RefreshIndicator(
+                        onRefresh: ()=> controller.refresh(),
+                        edgeOffset: 0,
+                        color: Colors.lightBlue,
+                        backgroundColor: Colors.white,
+                        child: ListView.builder(
+                            itemCount: controller.listPending.length,
+                            // itemCount: dataSupportPending.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final item = controller.listPending[index];
+                              // final item = dataSupportPending[index];
+                              return taskItem(
+                                item: item,
+                                status: item.status ?? "",
+                                request: item.request ?? "",
+                                timeSchedule: item.timeSchedule ?? "",
+                                address: item.address ?? "",
+                              );
+                            }),
+                      ),
                     ),
                     Obx(
-                      () => ListView.builder(
-                          itemCount: controller.listProgress.length,
-                          // itemCount: dataSupportProgress.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final item = controller.listProgress[index];
-                            // final item = dataSupportProgress[index];
-                            return taskItem(
-                              item: item,
-                              status: item.status ?? "",
-                              request: item.request ?? "",
-                              timeSchedule: item.timeSchedule ?? "",
-                              address: item.address ?? "",
-                            );
-                          }),
+                      () => RefreshIndicator(
+                        onRefresh: ()=> controller.refresh(),
+                        edgeOffset: 0,
+                        color: Colors.lightBlue,
+                        backgroundColor: Colors.white,
+                        child: ListView.builder(
+                            itemCount: controller.listProgress.length,
+                            // itemCount: dataSupportProgress.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final item = controller.listProgress[index];
+                              // final item = dataSupportProgress[index];
+                              return taskItem(
+                                item: item,
+                                status: item.status ?? "",
+                                request: item.request ?? "",
+                                timeSchedule: item.timeSchedule ?? "",
+                                address: item.address ?? "",
+                              );
+                            }),
+                      ),
                     ),
                   ]),
                 ),
