@@ -16,11 +16,11 @@ class taskItem extends StatefulWidget {
   final DateTime? timeSchedule;
   final SupportList item;
   final String address;
-  final Color colorBorder;
+  // final Color colorBorder;
 
   const taskItem(
       {super.key,
-      required this.colorBorder,
+      // required this.colorBorder,
       required this.status,
       required this.request,
       this.timeSchedule,
@@ -48,8 +48,8 @@ class _taskItemState extends State<taskItem> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 stops:  [0.03, 0.02],
-                // colors: [Colors.red, Colors.white]
-                colors: [widget.colorBorder, Colors.white],
+                // colors: [widget.colorBorder, Colors.white],
+                colors: [Colors.red, Colors.white],
               ),
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
