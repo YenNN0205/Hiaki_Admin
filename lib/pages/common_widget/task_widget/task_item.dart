@@ -3,6 +3,7 @@ import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/task_page/detail_task_page.dart';
+import 'package:intl/intl.dart';
 import '../../../controllers/update_list_controller.dart';
 // import '../../../utils/networking.dart';
 // import '../yesno_dialog.dart';
@@ -12,7 +13,7 @@ import 'status_task.dart';
 class taskItem extends StatefulWidget {
   final String status;
   final String request;
-  final String timeSchedule;
+  final DateTime? timeSchedule;
   final SupportList item;
   final String address;
   final Color colorBorder;
@@ -22,7 +23,7 @@ class taskItem extends StatefulWidget {
       required this.colorBorder,
       required this.status,
       required this.request,
-      required this.timeSchedule,
+      this.timeSchedule,
       required this.item,
       required this.address});
 
@@ -108,7 +109,8 @@ class _taskItemState extends State<taskItem> {
                         Padding(
                           padding: EdgeInsets.only(top: 6.0),
                           child: Text(
-                            widget.timeSchedule,
+                            DateFormat("dd/MM/yyyy hh:mm:ss")
+                                .format(widget.timeSchedule ?? DateTime.now()),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

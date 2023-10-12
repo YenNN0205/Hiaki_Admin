@@ -5,6 +5,7 @@ import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:hiaki_admin/pages/common_widget/item_details_common.dart';
 import 'package:hiaki_admin/pages/main_page.dart';
+import 'package:intl/intl.dart';
 
 import '../../utils/data_bucket.dart';
 import '../../utils/networking.dart';
@@ -92,7 +93,8 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Ngày nhận',
-                        description: _item.timeSchedule ?? "",
+                        description: DateFormat("dd/MM/yyyy hh:mm:ss")
+                            .format(_item.timeSchedule ?? DateTime.now()),
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Tên khách hàng',

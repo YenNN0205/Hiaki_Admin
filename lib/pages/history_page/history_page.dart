@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/controllers/update_list_controller.dart';
+import 'package:intl/intl.dart';
 
 import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
@@ -47,7 +48,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   item: item,
                   status: item.status ?? "",
                   request: item.request ?? "",
-                  timeSchedule: item.timeSchedule ?? "",
+                  timeSchedule: item.timeSchedule ,
                   address: item.address ?? "",
                 );
               }),

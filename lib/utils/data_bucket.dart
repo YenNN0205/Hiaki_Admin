@@ -49,7 +49,9 @@ class DataBucket {
       var request = item['Request'];
       var requestType = item['RequestType'];
       var creationDate = item['CreationDate'];
-      var timeSchedule = item['TimeSchedule'];
+      var timeSchedule = item['TimeSchedule'].toString();
+      DateTime timeScheduleFormat =
+          DateFormat("yyyy/MM/dd hh:mm:ss").parse(timeSchedule);
       var status = item['Status'];
       var contractID = item['ContractID'];
       var maintenanceID = item['MaintenanceID'];
@@ -72,7 +74,7 @@ class DataBucket {
             request: request,
             requestType: requestType,
             creationDate: creationDate,
-            timeSchedule: timeSchedule,
+            timeSchedule: timeScheduleFormat,
             status: status,
             contractID: contractID,
             maintenanceID: maintenanceID,
@@ -97,7 +99,9 @@ class DataBucket {
       var request = item['Request'];
       var requestType = item['RequestType'];
       var creationDate = item['CreationDate'];
-      var timeSchedule = item['TimeSchedule'];
+      var timeSchedule = item['TimeSchedule'].toString();
+      DateTime timeScheduleFormat =
+          DateFormat("yyyy/MM/dd hh:mm:ss").parse(timeSchedule);
       var status = item['Status'];
       var contractID = item['ContractID'];
       var maintenanceID = item['MaintenanceID'];
@@ -120,7 +124,7 @@ class DataBucket {
             request: request,
             requestType: requestType,
             creationDate: creationDate,
-            timeSchedule: timeSchedule,
+            timeSchedule: timeScheduleFormat,
             status: status,
             contractID: contractID,
             maintenanceID: maintenanceID,
@@ -146,7 +150,9 @@ class DataBucket {
       var request = item['Request'];
       var requestType = item['RequestType'];
       var creationDate = item['CreationDate'];
-      var timeSchedule = item['TimeSchedule'];
+      var timeSchedule = item['TimeSchedule'].toString();
+      DateTime timeScheduleFormat =
+          DateFormat("yyyy/MM/dd hh:mm:ss").parse(timeSchedule);
       var status = item['Status'];
       var contractID = item['ContractID'];
       var maintenanceID = item['MaintenanceID'];
@@ -169,7 +175,7 @@ class DataBucket {
             request: request,
             requestType: requestType,
             creationDate: creationDate,
-            timeSchedule: timeSchedule,
+            timeSchedule: timeScheduleFormat,
             status: status,
             contractID: contractID,
             maintenanceID: maintenanceID,

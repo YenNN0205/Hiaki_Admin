@@ -6,7 +6,7 @@ class SupportList {
   String? request;
   String? requestType;
   String? creationDate;
-  String? timeSchedule;
+  DateTime? timeSchedule;
   String? status;
   String? contractID;
   String? maintenanceID;

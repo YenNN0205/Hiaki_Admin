@@ -92,7 +92,7 @@ class _TasksPageState extends State<TasksPage> {
                                 item: item,
                                 status: item.status ?? "",
                                 request: item.request ?? "",
-                                timeSchedule: item.timeSchedule ?? "",
+                                timeSchedule: item.timeSchedule,
                                 address: item.address ?? "",
                               );
                             }),
@@ -115,7 +115,7 @@ class _TasksPageState extends State<TasksPage> {
                                 item: item,
                                 status: item.status ?? "",
                                 request: item.request ?? "",
-                                timeSchedule: item.timeSchedule ?? "",
+                                timeSchedule: item.timeSchedule,
                                 address: item.address ?? "",
                               );
                             }),
