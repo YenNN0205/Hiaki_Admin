@@ -11,6 +11,21 @@ class TaskListController extends GetxController {
   RxList<SupportList> listDone = RxList();
   RxList<UserProfileModel> userData = RxList();
 
+  Future<void> refresh() async {
+    await Future.delayed(Duration(seconds: 1));
+    await Networking.getInstance().reloadMetadata();
+    // get data from api
+    final listAPIPending = DataBucket.getInstance().getSupportPending();
+    final listAPIProgress = DataBucket.getInstance().getSupportProgress();
+    final listAPIHistory = DataBucket.getInstance().getSupportHistory();
+    final userAPIData = DataBucket.getInstance().getDataProfile();
+
+    listPending.value = listAPIPending;
+    listProgress.value = listAPIProgress;
+    listDone.value = listAPIHistory;
+    userData.value = userAPIData;
+  }
+
   void getTaskList() {
     // get data from api
     final listAPIPending = DataBucket.getInstance().getSupportPending();
