@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/model/support_list.dart';
 import 'package:hiaki_admin/utils/networking.dart';
@@ -10,7 +13,14 @@ class TaskListController extends GetxController {
   RxList<SupportList> listProgress = RxList();
   RxList<SupportList> listDone = RxList();
   RxList<UserProfileModel> userData = RxList();
+  
+  Color colorTask (DateTime checkInTime){
+    DateTime currentTime = DateTime.now();
+    if(checkInTime)
 
+    return Colors.red;
+  }
+  
   Future<void> refresh() async {
     await Future.delayed(Duration(seconds: 1));
     await Networking.getInstance().reloadMetadata();

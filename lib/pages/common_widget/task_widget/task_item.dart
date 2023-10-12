@@ -4,8 +4,8 @@ import 'package:hiaki_admin/pages/common_widget/button_common.dart';
 import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/task_page/detail_task_page.dart';
 import '../../../controllers/update_list_controller.dart';
-import '../../../utils/networking.dart';
-import '../yesno_dialog.dart';
+// import '../../../utils/networking.dart';
+// import '../yesno_dialog.dart';
 import 'button_task.dart';
 import 'status_task.dart';
 
@@ -15,9 +15,11 @@ class taskItem extends StatefulWidget {
   final String timeSchedule;
   final SupportList item;
   final String address;
+  final Color colorBorder;
 
   const taskItem(
       {super.key,
+      required this.colorBorder,
       required this.status,
       required this.request,
       required this.timeSchedule,
@@ -43,6 +45,11 @@ class _taskItemState extends State<taskItem> {
             padding: const EdgeInsets.all(24),
             margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
             decoration: BoxDecoration(
+              gradient: LinearGradient(
+                stops:  [0.03, 0.02],
+                // colors: [Colors.red, Colors.white]
+                colors: [widget.colorBorder, Colors.white],
+              ),
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
             ),

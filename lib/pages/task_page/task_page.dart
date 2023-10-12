@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../controllers/update_list_controller.dart';
 import '../../utils/data_bucket.dart';
 import '../common_widget/gradient_app_bar.dart';
@@ -110,6 +111,7 @@ class _TasksPageState extends State<TasksPage> {
                               final item = controller.listProgress[index];
                               // final item = dataSupportProgress[index];
                               return taskItem(
+                                colorBorder: controller.colorTask(DateFormat (item.timeSchedule)),
                                 item: item,
                                 status: item.status ?? "",
                                 request: item.request ?? "",

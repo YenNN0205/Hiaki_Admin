@@ -12,7 +12,7 @@
     <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controllers/update_list_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/update_list_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/history_page/history_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/history_page/history_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/task_widget/task_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/task_widget/task_item.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
