@@ -42,17 +42,17 @@ class _ProfilePageState extends State<ProfilePage> {
               Color(0xff6491d3)
             ])),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20,60,20,0),
+              padding: const EdgeInsets.fromLTRB(20, 60, 20, 0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: maxWidth*0.072,
+                    width: maxWidth * 0.072,
                   ),
                   Container(
-                      child: Text('Thông tin cá nhân',style: TextStyle(fontSize: 22, color: Colors.white))
-                  ),
+                      child: Text('Thông tin cá nhân',
+                          style: TextStyle(fontSize: 22, color: Colors.white))),
                   FloatingActionButton(
                     mini: true,
                     onPressed: () {},
@@ -75,7 +75,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               color: Colors.white,
             ),
-
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
