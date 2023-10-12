@@ -49,6 +49,7 @@ class TaskListController extends GetxController {
 
         if (isDetail) {
           Get.back();
+          Get.snackbar("Success", "");
         }
       }
     }
