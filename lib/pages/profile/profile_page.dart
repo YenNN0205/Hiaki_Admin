@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
+  RxBool readOnly = true.obs;
 
   final dataProfile = DataBucket.getInstance().getDataProfile();
 
@@ -55,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: TextStyle(fontSize: 22, color: Colors.white))),
                   FloatingActionButton(
                     mini: true,
-                    onPressed: () {},
+                    onPressed: () => readOnly.toggle(),
                     child: CircleAvatar(
                       radius: 20,
                       child: Icon(Icons.edit),
@@ -65,31 +66,33 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: maxHeight * 0.2),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(30),
-                topLeft: Radius.circular(30),
+
+          Obx(
+            () => Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(top: maxHeight * 0.2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                ),
+                color: Colors.white,
               ),
-              color: Colors.white,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20, top: 80),
-                  child: Text(
-                    '${dataProfile[0].fullName ?? "No data"}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20, top: 80),
+                    child: Text(
+                      '${dataProfile[0].fullName ?? "No data"}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                ),
-                profileTextField(
+                  ProfileTextField(
                     text: '${dataProfile[0].userName ?? "No data"}',
                     hintText: 'Username',
                     textType: TextInputType.text,
@@ -97,8 +100,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.person,
                       color: Colors.black54,
                     ),
-                    obscureText: false),
-                profileTextField(
+                    readOnly: true,
+                    updateTextController: _nameController,
+                  ),
+                  ProfileTextField(
                     text: "${dataProfile[0].email ?? "No data"}",
                     hintText: 'Email',
                     textType: TextInputType.emailAddress,
@@ -106,8 +111,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.mail,
                       color: Colors.black54,
                     ),
-                    obscureText: false),
-                profileTextField(
+                    updateTextController: _emailController,
+                    readOnly: readOnly.value,
+                  ),
+                  ProfileTextField(
                     text: "${dataProfile[0].phoneNumber ?? "No data"}",
                     hintText: 'Số Điện Thoại',
                     textType: TextInputType.number,
@@ -115,8 +122,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.phone,
                       color: Colors.black54,
                     ),
-                    obscureText: false),
-                profileTextField(
+                    updateTextController: _phoneController,
+                    readOnly: readOnly.value,
+                  ),
+                  ProfileTextField(
                     text: "${dataProfile[0].address ?? "No data"}",
                     hintText: 'Địa Chỉ',
                     textType: TextInputType.text,
@@ -124,18 +133,31 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.location_on,
                       color: Colors.black54,
                     ),
-                    obscureText: false),
-                Padding(
-                  padding: EdgeInsets.only(top: maxHeight * 0.04),
-                  child: buttonCommon(
-                      maxWidth: maxWidth,
-                      onTap: () {
-                        Get.snackbar("Notification", "Log Out Success");
-                        Get.offAll(() => LoginPage());
-                      },
-                      tittle: 'Đăng Xuất'),
-                ),
-              ],
+                    updateTextController: _addressController,
+                    readOnly: readOnly.value,
+                  ),
+                  (readOnly.value)
+                      ? Padding(
+                          padding: EdgeInsets.only(top: maxHeight * 0.04),
+                          child: buttonCommon(
+                              maxWidth: maxWidth,
+                              onTap: () {
+                                Get.snackbar("Notification", "Log Out Success");
+                                Get.offAll(() => LoginPage());
+                              },
+                              tittle: 'Đăng Xuất'),
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(top: maxHeight * 0.04),
+                          child: buttonCommon(
+                              maxWidth: maxWidth,
+                              onTap: () {
+                                // Get.snackbar("Notification", "Log Out Success");
+                              },
+                              tittle: 'Cập nhật'),
+                        )
+                ],
+              ),
             ),
           ),
           //Avatar
@@ -166,7 +188,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
           ),
-          //button Edit
         ],
       ),
     );

@@ -14,15 +14,26 @@ class TaskListController extends GetxController {
   RxList<SupportList> listDone = RxList();
   RxList<UserProfileModel> userData = RxList();
 
-   // Validate for taskItem
+  // Validate for taskItem
 
-  // Color colorTask (DateTime checkInTime){
-  //   DateTime currentTime = DateTime.now();
-  //   if(checkInTime)
-  //
-  //   return Colors.red;
-  // }
-  
+  Color colorTask(DateTime timeSchedule) {
+    DateTime currentTime = DateTime.now();
+    DateTime _currentTime = DateTime(currentTime.year, currentTime.month,
+        currentTime.day, currentTime.hour, currentTime.minute);
+    DateTime _timeSchedule = DateTime(timeSchedule.year, timeSchedule.month,
+        timeSchedule.day, timeSchedule.hour, timeSchedule.minute);
+    if (currentTime.compareTo(timeSchedule) < 0) {
+      if ((_timeSchedule.difference(_currentTime).inHours) < 24) {
+        print(_timeSchedule.difference(_currentTime).inHours);
+        return Colors.yellow;
+      } else {
+        return Colors.green;
+      }
+    } else {
+      return Colors.red;
+    }
+  }
+
   Future<void> refresh() async {
     await Future.delayed(Duration(seconds: 1));
     await Networking.getInstance().reloadMetadata();
