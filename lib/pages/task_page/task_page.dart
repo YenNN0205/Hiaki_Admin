@@ -111,6 +111,7 @@ class _TasksPageState extends State<TasksPage> {
                               final item = controller.listProgress[index];
                               // final item = dataSupportProgress[index];
                               return taskItem(
+                                // colorBorder: controller.colorTask(item.timeSchedule),
                                 item: item,
                                 status: item.status ?? "",
                                 request: item.request ?? "",
