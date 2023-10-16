@@ -39,7 +39,7 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Chi tiết hỗ trợ',
+          'Chi tiết hỗ trợ (${_item.requestType})',
           style: TextStyle(color: Colors.white),
         ),
         flexibleSpace: const GradientAppBarColor(),
@@ -88,13 +88,23 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                     ),
                     ItemDetailCommon(
                         tittle: 'Ngày tạo',
-                        colorBorder: Colors.blueAccent,
+                        // colorBorder: Colors.blueAccent,
                         description: _item.creationDate ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
-                        tittle: 'Ngày nhận',
+                        tittle: 'Lịch hẹn',
                         description: DateFormat("dd/MM/yyyy hh:mm:ss")
                             .format(_item.timeSchedule ?? DateTime.now()),
+                        onTap: () {}),
+                    ItemDetailCommon(
+                        tittle: 'Số hợp đồng',
+                        // colorBorder: Colors.blueAccent,
+                        description: _item.contractID ?? "",
+                        onTap: () {}),
+                    ItemDetailCommon(
+                        tittle: 'Số bảo hành',
+                        // colorBorder: Colors.blueAccent,
+                        description: _item.maintenanceID ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Tên khách hàng',
@@ -105,6 +115,11 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         tittle: 'Số điện thoại',
                         colorBorder: Colors.orange,
                         description: _item.phoneNumber ?? "",
+                        onTap: () {}),
+                    ItemDetailCommon(
+                        tittle: 'Địa chỉ',
+                        colorBorder: Colors.purple,
+                        description: _item.address ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Kỹ thuật viên',

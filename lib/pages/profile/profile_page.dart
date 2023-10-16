@@ -102,6 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     readOnly: true,
                     updateTextController: _nameController,
+
                   ),
                   ProfileTextField(
                     text: "${dataProfile[0].email ?? "No data"}",
@@ -152,7 +153,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: buttonCommon(
                               maxWidth: maxWidth,
                               onTap: () {
-                                // Get.snackbar("Notification", "Log Out Success");
                               },
                               tittle: 'Cập nhật'),
                         )
@@ -168,15 +168,11 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 CircleAvatar(
                   radius: 70,
-                  // radius: maxWidth*0.18,
                   backgroundColor: Color(0xff6491d3),
                   child: CircleAvatar(
                     radius: 65,
-                    // radius: maxWidth*0.17,
                     backgroundColor: Colors.white,
                     child: SizedBox(
-                        // height: maxHeight*0.2,
-                        // width: maxWidth*0.25,
                         height: 100,
                         width: 100,
                         child: Image.asset(
