@@ -75,3 +75,4 @@ class UpdateStatus {
     return data;
   }
 }
+

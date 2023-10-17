@@ -35,7 +35,6 @@ class TaskListController extends GetxController {
   }
 
   Future<void> refresh() async {
-    await Future.delayed(Duration(seconds: 1));
     await Networking.getInstance().reloadMetadata();
     // get data from api
     final listAPIPending = DataBucket.getInstance().getSupportPending();

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:hiaki_admin/model/support_list.dart';
+import 'package:hiaki_admin/model/profile_model.dart';
 import 'package:http/http.dart' as http;
 import 'data_bucket.dart';
+
 
 class Networking {
   static final Networking _instance = Networking._internal();
@@ -92,13 +94,13 @@ class Networking {
     }
   }
 
-  Future<String> updateProfile(UpdateStatus object) async {
+  Future<String> updateProfile(UpdateProfile object) async {
     String basicAuth =
         'Basic ${base64Encode(utf8.encode('$_userName:$_password'))}';
     Map<String, String> requestHeaders = {'authorization': basicAuth};
     // http: //103.157.218.115/CoffeeRoastery/hs/CoffeeRoastery/V1/CoffeeProduct?CoffeeProductCode=0001
 
-    final response = await http.put(Uri.parse('$_host/V1/maintenance_admin'),
+    final response = await http.put(Uri.parse('$_host/V1/userdata'),
         headers: requestHeaders, body: jsonEncode(object.toJson()));
 
     if (response.statusCode == 200) {

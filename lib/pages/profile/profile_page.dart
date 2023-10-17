@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:hiaki_admin/pages/authentications/authentication.dart';
 import 'package:hiaki_admin/pages/common_widget/common.dart';
 import 'package:hiaki_admin/utils/data_bucket.dart';
+import 'package:hiaki_admin/utils/networking.dart';
+import 'package:hiaki_admin/model/profile_model.dart';
+import 'package:hiaki_admin/controllers/profile_controller.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../common_widget/profile_text_field.dart';
 
@@ -14,13 +18,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final controller = Get.put(ProfileController());
+
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
-  RxBool readOnly = true.obs;
+  
+@override
+  void initState() {
+   controller.initData();
+    super.initState();
+  }
 
-  final dataProfile = DataBucket.getInstance().getDataProfile();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: TextStyle(fontSize: 22, color: Colors.white))),
                   FloatingActionButton(
                     mini: true,
-                    onPressed: () => readOnly.toggle(),
+                    onPressed: () => controller.readOnly.toggle(),
                     child: CircleAvatar(
                       radius: 20,
                       child: Icon(Icons.edit),
@@ -68,10 +78,17 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           Obx(
-            () => Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(top: maxHeight * 0.2),
-              decoration: BoxDecoration(
+            () => controller.userData.isEmpty
+                ? Center(
+                    child: LoadingAnimationWidget.discreteCircle(
+                        color: Color(0xff6491d3),
+                        size: 120,
+                        thirdRingColor:Color(0xff9eca47),
+                        secondRingColor: Color(0xff68b9b3),))
+                : Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: maxHeight * 0.2),
+                    decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30),
                   topLeft: Radius.circular(30),
@@ -85,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: EdgeInsets.only(bottom: 20, top: 80),
                     child: Text(
-                      '${dataProfile[0].fullName ?? "No data"}',
+                      '${controller.userData[0].fullName ?? "No data"}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -93,9 +110,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   ProfileTextField(
-                    text: '${dataProfile[0].userName ?? "No data"}',
+                    text: '${controller.userData[0].userName ?? "No data"}',
                     hintText: 'Username',
                     textType: TextInputType.text,
+                    textColor: Colors.black54,
                     iconTextField: Icon(
                       Icons.person,
                       color: Colors.black54,
@@ -105,7 +123,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   ),
                   ProfileTextField(
-                    text: "${dataProfile[0].email ?? "No data"}",
+                    autofocus: true,
+                    text: "${controller.userData[0].email ?? "No data"}",
                     hintText: 'Email',
                     textType: TextInputType.emailAddress,
                     iconTextField: Icon(
@@ -113,10 +132,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black54,
                     ),
                     updateTextController: _emailController,
-                    readOnly: readOnly.value,
+                    readOnly: controller.readOnly.value,
                   ),
                   ProfileTextField(
-                    text: "${dataProfile[0].phoneNumber ?? "No data"}",
+                    text: "${controller.userData[0].phoneNumber ?? "No data"}",
                     hintText: 'Số Điện Thoại',
                     textType: TextInputType.number,
                     iconTextField: Icon(
@@ -124,10 +143,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black54,
                     ),
                     updateTextController: _phoneController,
-                    readOnly: readOnly.value,
+                    readOnly: controller.readOnly.value,
                   ),
                   ProfileTextField(
-                    text: "${dataProfile[0].address ?? "No data"}",
+                    text: "${controller.userData[0].address ?? "No data"}",
                     hintText: 'Địa Chỉ',
                     textType: TextInputType.text,
                     iconTextField: Icon(
@@ -135,9 +154,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.black54,
                     ),
                     updateTextController: _addressController,
-                    readOnly: readOnly.value,
+                    readOnly: controller.readOnly.value,
                   ),
-                  (readOnly.value)
+                  (controller.readOnly.value)
                       ? Padding(
                           padding: EdgeInsets.only(top: maxHeight * 0.04),
                           child: buttonCommon(
@@ -152,7 +171,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: EdgeInsets.only(top: maxHeight * 0.04),
                           child: buttonCommon(
                               maxWidth: maxWidth,
-                              onTap: () {
+                              onTap: () async{
+                                await controller.reloadProfile(email: _emailController.text, phoneNumber: _phoneController.text, titleDialog: "Bạn có muốn thay đổi thông tin", address: _addressController.text);
                               },
                               tittle: 'Cập nhật'),
                         )
@@ -162,6 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           //Avatar
           Container(
+
             padding: EdgeInsets.only(top: maxHeight * 0.125),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
