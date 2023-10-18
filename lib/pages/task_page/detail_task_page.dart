@@ -87,15 +87,21 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                       ),
                     ),
                     ItemDetailCommon(
-                        tittle: 'Ngày tạo',
-                        // colorBorder: Colors.blueAccent,
-                        description: _item.creationDate ?? "",
+                        tittle: 'Loại yêu cầu',
+                        colorBorder: Colors.red.shade400,
+                        description: _item.requestType ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Lịch hẹn',
+                        colorBorder: Colors.red.shade400,
                         description: DateFormat("dd/MM/yyyy hh:mm:ss")
                             .format(_item.timeSchedule ?? DateTime.now()),
                         onTap: () {}),
+                    ItemDetailCommon(
+                        tittle: 'Ngày tạo',
+                        description: _item.creationDate ?? "",
+                        onTap: () {}),
+
                     ItemDetailCommon(
                         tittle: 'Số hợp đồng',
                         // colorBorder: Colors.blueAccent,
@@ -108,17 +114,17 @@ class _DetailTaskPageState extends State<DetailTaskPage> {
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Tên khách hàng',
-                        colorBorder: Colors.green,
+                        colorBorder:  Colors.green,
                         description: _item.customer ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Số điện thoại',
-                        colorBorder: Colors.orange,
+                        colorBorder: Colors.green,
                         description: _item.phoneNumber ?? "",
                         onTap: () {}),
                     ItemDetailCommon(
                         tittle: 'Địa chỉ',
-                        colorBorder: Colors.purple,
+                        colorBorder:  Colors.green,
                         description: _item.address ?? "",
                         onTap: () {}),
                     ItemDetailCommon(

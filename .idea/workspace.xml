@@ -10,16 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bd16250-d031-43b3-a5b7-864cc42994fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.run/main.dart.run.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controllers/profile_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/model/profile_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Hiaki_Admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Hiaki_Admin.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controllers/update_list_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/update_list_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model/support_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/support_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/profile_text_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/profile/profile_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/networking.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/networking.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/common_widget/yesno_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/common_widget/yesno_dialog.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/task_page/detail_task_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/task_page/detail_task_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/task_page/task_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

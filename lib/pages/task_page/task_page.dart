@@ -82,22 +82,40 @@ class _TasksPageState extends State<TasksPage> {
                         edgeOffset: 0,
                         color: Colors.lightBlue,
                         backgroundColor: Colors.white,
-                        child: ListView.builder(
-                            itemCount: controller.listPending.length,
-                            // itemCount: dataSupportPending.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final item = controller.listPending[index];
-                              // final item = dataSupportPending[index];
-                              return taskItem(
-                                colorBorder: controller.colorTask(
-                                    item.timeSchedule ?? DateTime.now()),
-                                item: item,
-                                status: item.status ?? "",
-                                request: item.request ?? "",
-                                timeSchedule: item.timeSchedule,
-                                address: item.address ?? "",
-                              );
-                            }),
+                        child: controller.listPending.isEmpty
+                            ? Center(
+                                child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.crisis_alert,
+                                    color: Colors.black54,
+                                    size: 40.0,
+                                  ),
+                                  Text(
+                                    'Không có đơn hỗ trợ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ))
+                            : ListView.builder(
+                                itemCount: controller.listPending.length,
+                                // itemCount: dataSupportPending.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final item = controller.listPending[index];
+                                  // final item = dataSupportPending[index];
+                                  return taskItem(
+                                    colorBorder: controller.colorTask(
+                                        item.timeSchedule ?? DateTime.now()),
+                                    item: item,
+                                    status: item.status ?? "",
+                                    request: item.request ?? "",
+                                    timeSchedule: item.timeSchedule,
+                                    address: item.address ?? "",
+                                  );
+                                }),
                       ),
                     ),
                     Obx(
@@ -106,22 +124,39 @@ class _TasksPageState extends State<TasksPage> {
                         edgeOffset: 0,
                         color: Colors.lightBlue,
                         backgroundColor: Colors.white,
-                        child: ListView.builder(
-                            itemCount: controller.listProgress.length,
-                            // itemCount: dataSupportProgress.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final item = controller.listProgress[index];
-                              // final item = dataSupportProgress[index];
-                              return taskItem(
-                                colorBorder: controller.colorTask(
-                                    item.timeSchedule ?? DateTime.now()),
-                                item: item,
-                                status: item.status ?? "",
-                                request: item.request ?? "",
-                                timeSchedule: item.timeSchedule,
-                                address: item.address ?? "",
-                              );
-                            }),
+                        child: controller.listProgress.isEmpty
+                            ? Center(
+                                child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.crisis_alert,
+                                    color: Colors.black54,
+                                    size: 40.0,
+                                  ),
+                                  Text(
+                                    'Không có đơn hỗ trợ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              ))
+                            : ListView.builder(
+                                itemCount: controller.listProgress.length,
+                                // itemCount: dataSupportProgress.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final item = controller.listProgress[index];
+                                  return taskItem(
+                                    colorBorder: controller.colorTask(
+                                        item.timeSchedule ?? DateTime.now()),
+                                    item: item,
+                                    status: item.status ?? "",
+                                    request: item.request ?? "",
+                                    timeSchedule: item.timeSchedule,
+                                    address: item.address ?? "",
+                                  );
+                                }),
                       ),
                     ),
                   ]),
