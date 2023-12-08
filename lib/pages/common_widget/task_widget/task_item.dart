@@ -17,6 +17,7 @@ class taskItem extends StatefulWidget {
   final SupportList item;
   final String address;
   final Color colorBorder;
+  final double heightColor;
 
   const taskItem(
       {super.key,
@@ -25,7 +26,8 @@ class taskItem extends StatefulWidget {
       required this.request,
       this.timeSchedule,
       required this.item,
-      required this.address});
+      required this.address,
+      required this.heightColor});
 
   @override
   State<taskItem> createState() => _taskItemState();
@@ -42,153 +44,164 @@ class _taskItemState extends State<taskItem> {
           onTap: () => Get.to(DetailTaskPage(
             item: widget.item,
           )),
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                stops: [0.03, 0.02],
-                // colors: [widget.colorBorder, Colors.white],
-                colors: [widget.colorBorder, Colors.white],
-              ),
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+            children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(30, 24, 24, 24),
+                margin: const EdgeInsets.only(bottom: 12, left: 16, right: 16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CircleAvatar(
-                          child: Image.asset(
-                            'assets/setting.png',
-                            fit: BoxFit.fill,
-                          ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              child: Image.asset(
+                                'assets/setting.png',
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8),
+                              child: Container(
+                                width: maxWidth * 0.38,
+                                child: Text(
+                                  widget.request,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8),
-                          child: Container(
-                            width: maxWidth * 0.38,
-                            child: Text(
-                              widget.request,
-                              overflow: TextOverflow.ellipsis,
+                        statusTask(tittle: widget.status)
+                      ],
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 12, bottom: 12),
+                      height: 1,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 91, 91, 91)),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Thời gian',
                               style: TextStyle(
-                                  color: Colors.black,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 18),
+                                  color: Color.fromARGB(221, 88, 87, 87),
+                                  fontSize: 14),
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 6.0),
+                              child: Text(
+                                DateFormat("dd/MM/yyyy hh:mm:ss").format(
+                                    widget.timeSchedule ?? DateTime.now()),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            if (widget.status == "Open")
+                              Padding(
+                                padding: const EdgeInsets.only(top: 18),
+                                child: buttonTask(
+                                    colorBg: Colors.white,
+                                    colorText: Colors.black,
+                                    onTap: () async {
+                                      await controller.reloadData(
+                                          maintenanceID:
+                                              widget.item.maintenanceID ?? "",
+                                          titleDialog: "Từ chối hỗ trợ",
+                                          status: "Reject");
+                                    },
+                                    tittle: "Từ chối"),
+                              )
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            const Text(
+                              'Địa chỉ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(221, 88, 87, 87),
+                                  fontSize: 14),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 6.0),
+                              width: maxWidth * 0.3,
+                              child: Text(
+                                widget.address,
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            if (widget.status == "Open")
+                              Padding(
+                                padding: const EdgeInsets.only(top: 18),
+                                child: buttonTask(
+                                    colorBg: const Color(0xFF003B40),
+                                    colorText: const Color.fromARGB(
+                                        255, 248, 245, 245),
+                                    onTap: () async {
+                                      await controller.reloadData(
+                                          maintenanceID:
+                                              widget.item.maintenanceID ?? "",
+                                          titleDialog: "Tiếp nhận hỗ trợ",
+                                          status: "On progressing");
+                                    },
+                                    tittle: "Chấp nhận"),
+                              )
+                          ],
                         ),
                       ],
                     ),
-                    statusTask(tittle: widget.status)
+                    if (widget.status == "On progressing")
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18),
+                        child: buttonCommon(
+                            maxWidth: maxWidth * 0.7,
+                            height: 32,
+                            onTap: () async {
+                              await controller.reloadData(
+                                  maintenanceID:
+                                      widget.item.maintenanceID ?? "",
+                                  titleDialog: "Xác nhận hoàn thành",
+                                  status: "Done");
+                            },
+                            tittle: "Hoàn thành"),
+                      )
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 12, bottom: 12),
-                  height: 1,
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 91, 91, 91)),
+              ),
+              Container(
+                width: 18,
+                height: widget.heightColor,
+                margin: const EdgeInsets.only(bottom: 12, left: 16),
+                decoration: BoxDecoration(
+                  color: widget.colorBorder,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      bottomLeft: Radius.circular(24)),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Thời gian',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(221, 88, 87, 87),
-                              fontSize: 14),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 6.0),
-                          child: Text(
-                            DateFormat("dd/MM/yyyy hh:mm:ss")
-                                .format(widget.timeSchedule ?? DateTime.now()),
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        if (widget.status == "Open")
-                          Padding(
-                            padding: const EdgeInsets.only(top: 18),
-                            child: buttonTask(
-                                colorBg: Colors.white,
-                                colorText: Colors.black,
-                                onTap: () async {
-                                  await controller.reloadData(
-                                      maintenanceID:
-                                          widget.item.maintenanceID ?? "",
-                                      titleDialog: "Từ chối hỗ trợ",
-                                      status: "Reject");
-                                },
-                                tittle: "Từ chối"),
-                          )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const Text(
-                          'Địa chỉ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(221, 88, 87, 87),
-                              fontSize: 14),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 6.0),
-                          width: maxWidth * 0.3,
-                          child: Text(
-                            widget.address,
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        if (widget.status == "Open")
-                          Padding(
-                            padding: const EdgeInsets.only(top: 18),
-                            child: buttonTask(
-                                colorBg: const Color(0xFF003B40),
-                                colorText:
-                                    const Color.fromARGB(255, 248, 245, 245),
-                                onTap: () async {
-                                  await controller.reloadData(
-                                      maintenanceID:
-                                          widget.item.maintenanceID ?? "",
-                                      titleDialog: "Tiếp nhận hỗ trợ",
-                                      status: "On progressing");
-                                },
-                                tittle: "Chấp nhận"),
-                          )
-                      ],
-                    ),
-                  ],
-                ),
-                if (widget.status == "On progressing")
-                  Padding(
-                    padding: const EdgeInsets.only(top: 18),
-                    child: buttonCommon(
-                        maxWidth: maxWidth * 0.7,
-                        height: 32,
-                        onTap: () async {
-                          await controller.reloadData(
-                              maintenanceID: widget.item.maintenanceID ?? "",
-                              titleDialog: "Xác nhận hoàn thành",
-                              status: "Done");
-                        },
-                        tittle: "Hoàn thành"),
-                  )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

@@ -96,6 +96,7 @@ class _TasksPageState extends State<TasksPage> {
                                 request: item.request ?? "",
                                 timeSchedule: item.timeSchedule,
                                 address: item.address ?? "",
+                                heightColor: 210,
                               );
                             }),
                       ),
@@ -120,6 +121,7 @@ class _TasksPageState extends State<TasksPage> {
                                 request: item.request ?? "",
                                 timeSchedule: item.timeSchedule,
                                 address: item.address ?? "",
+                                heightColor: 210,
                               );
                             }),
                       ),

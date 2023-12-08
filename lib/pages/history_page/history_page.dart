@@ -48,6 +48,7 @@ class _HistoryPageState extends State<HistoryPage> {
                       request: item.request ?? "",
                       timeSchedule: item.timeSchedule,
                       address: item.address ?? "",
+                      heightColor: 159,
                     );
                   }),
             )));
