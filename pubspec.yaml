@@ -1,5 +1,5 @@
 name: hiaki_admin
-description: A new Flutter project.
+description: A Hiaki Admin project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=3.0.3 <4.0.0"
@@ -39,6 +39,14 @@ dependencies:
   http: ^1.1.0
   intl: ^0.18.1
   html: ^0.15.4
+  flutter_launcher_icons: ^0.13.1
+  change_app_package_name: ^1.1.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/app-logo.png"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:
@@ -95,3 +103,5 @@ flutter:
     - assets/
     - assets/hiaki-Logo.png
     - assets/avatar.png
+    - assets/admin_logo.png
+    - assets/app-logo.png
